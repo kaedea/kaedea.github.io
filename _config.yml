@@ -7,7 +7,7 @@ title: Kaede's Studio
 subtitle: KIRA!!(<ゝω·)☆
 description: 就算你给风子很好吃的糖果，风子也不会跟你走的~
 author: Kaede Akatsuki
-language: zh-CN
+language: en
 timezone: 
 
 # URL
@@ -40,6 +40,7 @@ future: true
 highlight:
   enable: true
   line_number: true
+  auto_detect: true
   tab_replace:
 
 # Category & Tag
@@ -62,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: tranquilpeak
+theme: tranquilpeak1.3.0
 
 #Duoshuo
 duoshuo_shortname: kaeden
