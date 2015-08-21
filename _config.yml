@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Kaede's Studio
-subtitle: KIRA!!(<ゝω·)☆
-description: 就算你给风子很好吃的糖果，风子也不会跟你走的~
-author: Kaede Akatsuki
-language: zh-CN
-timezone: 
+title: Hexo
+subtitle:
+description:
+author: John Doe
+language:
+timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://www.kaedea.com
+url: http://yoursite.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -40,6 +40,7 @@ future: true
 highlight:
   enable: true
   line_number: true
+  auto_detect: true
   tab_replace:
 
 # Category & Tag
@@ -62,14 +63,9 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: tranquilpeak
-
-#Duoshuo
-duoshuo_shortname: kaeden
+theme: landscape
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repository: https://github.com/kaedea/kaedea.github.io.git
-  branch: master
+  type:
