@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Kaede's Studio">
 <meta property="og:description" content="背景    最近有个需求，APP的使用ListView显示数据，每行显示3个数据，但是后台传来的数据个数不一定是3的倍数，有可能是2、3、4、6、10……产品要求如果少于3不显示，然后每行一定要显示满3个，多余的去掉，不能出现一行只显示1个或者2的情况，本来让服务器规定只传过来3的倍数个数据即可，但基于对服务器过来的数据都有可能不靠谱（卖队友）这一原则，客户端这边最好还是对数据做一些处理。
 需求">
-<meta property="og:updated_time" content="2015-08-23T09:07:08.720Z">
+<meta property="og:updated_time" content="2015-08-24T07:00:47.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何让GridView的每一行都铺满显示，不出现最后出现空位">
 <meta name="twitter:description" content="背景    最近有个需求，APP的使用ListView显示数据，每行显示3个数据，但是后台传来的数据个数不一定是3的倍数，有可能是2、3、4、6、10……产品要求如果少于3不显示，然后每行一定要显示满3个，多余的去掉，不能出现一行只显示1个或者2的情况，本来让服务器规定只传过来3的倍数个数据即可，但基于对服务器过来的数据都有可能不靠谱（卖队友）这一原则，客户端这边最好还是对数据做一些处理。
@@ -200,9 +200,9 @@
 <span class="built_in">int</span> column = <span class="number">3</span>;<span class="comment">//每行显示3个</span>
 <span class="built_in">int</span> num_target = <span class="built_in">num</span> - <span class="built_in">num</span>%column;
 </code></pre><p>方法二：</p>
-<pre><code><span class="built_in">int</span> <span class="built_in">num</span> = <span class="number">10</span>;<span class="comment">//总数</span>
-<span class="built_in">int</span> column = <span class="number">3</span>;<span class="comment">//每行显示3个</span>
-<span class="built_in">int</span> num_target = column * （<span class="built_in">num</span>/column);
+<pre><code><span class="keyword">int</span> num = <span class="number">10</span>;<span class="comment">//总数</span>
+<span class="keyword">int</span> column = <span class="number">3</span>;<span class="comment">//每行显示3个</span>
+<span class="keyword">int</span> num_target = column * （num/column);
 </code></pre><p>  p.s. 这么简单的工作也要写进日志，你会不会认为我很蠢（其实我只是在练习Markdown语法…）</p>
 
             
@@ -392,14 +392,14 @@
         
             <h4 id="about-card-name">Kaede Akatsuki</h4>
         
-            <h5 id="about-card-bio"><p>author.bio</p>
+            <h5 id="about-card-bio"><p>話は安いものですので、コードを表させてください！</p>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br/>
-                <p>author.job</p>
+                <p>Android Developer</p>
 
             </h5>
         
