@@ -72,7 +72,7 @@ h4,
 h5,
 h6 {
   letter-spacing: -0.04em;
-  font-family: "Open Sans", SimHei, "Noto Sans", "Noto Sans CJK SC", "Microsoft Yahei", sans-serif;
+  font-family: Verdana, Geneva, "Open Sans", SimHei, "Noto Sans", "Noto Sans CJK SC", "Microsoft Yahei", sans-serif;
   font-weight: normal;
   line-height: 1.45em;
   color: #212121; }
@@ -394,7 +394,7 @@ blockquote {
   background: #fff;
   position: fixed;
   top: 0;
-  border: 1px solid #eef2f8;
+  border: 1px solid #E3F2FD;
   color: #88909a;
   z-index: 20;
   transition: transform 0.25s ease-in-out;
@@ -1055,7 +1055,7 @@ a.category--small,
 .figure.center .fig-img {
   margin: 2px auto; }
 
-.figure.left, .figure.fig-20, .figure.fig-25, .figure.fig-33, .figure.fig-50, .figure.fig-75 {
+.figure.left, .figure.fig-20, .figure.fig-25, .figure.fig-33, .figure.fig-50, .figure.fig-75, .figure.fig-100, .figure.center {
   float: left;
   margin: 2px; }
 
@@ -1776,7 +1776,7 @@ a.link-unstyled a.link:active {
 .pullquote {
   width: 45%;
   text-align: left; }
-  .pullquote.left, .pullquote.figure.fig-20, .pullquote.figure.fig-25, .pullquote.figure.fig-33, .pullquote.figure.fig-50, .pullquote.figure.fig-75 {
+  .pullquote.left, .pullquote.figure.fig-20, .pullquote.figure.fig-25, .pullquote.figure.fig-33, .pullquote.figure.fig-50, .pullquote.figure.fig-75, .pullquote.figure.fig-100, .pullquote.figure.center {
     float: left;
     margin: 10px 10px 10px 20px; }
   .pullquote.right {
@@ -1919,7 +1919,7 @@ a.link-unstyled a.link:active {
   display: inline-block;
   vertical-align: top; }
   .postShorten .postShorten-header .postShorten-title {
-    font-family: "Open Sans", SimHei, "Noto Sans", "Noto Sans CJK SC", "Microsoft Yahei", sans-serif;
+    font-family: Verdana, Geneva, "Open Sans", SimHei, "Noto Sans", "Noto Sans CJK SC", "Microsoft Yahei", sans-serif;
     margin: 0;
     word-break: initial;
     overflow: hidden; }
