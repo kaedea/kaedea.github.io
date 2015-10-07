@@ -11889,6 +11889,15 @@ return jQuery;
         var header = new Header();
         header.run();
     });
+
+      //img loading animation
+    $(document).ready(function(){  
+         //图片默认隐藏  
+         $('.postShorten-thumbnailimg img').hide();  
+         //使用fadeIn特效  
+         $("img").fadeIn("slow"); 
+    }); 
+
 }(jQuery);;+function($) {
     'use strict'
 
@@ -12297,6 +12306,16 @@ return jQuery;
         var sidebar = new Sidebar();
         sidebar.run();
     });
+    
+    //open external link in sidebar
+    $(document).ready(function() {
+    $('a').each(function() {
+      var a = new RegExp('/' + window.location.host + '/');
+      if (!a.test(this.href)) {
+      $(this).attr("target","_blank");
+      }
+   });
+});
 }(jQuery);;+(function($, sr) {
     // debouncing function from John Hann
     // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
