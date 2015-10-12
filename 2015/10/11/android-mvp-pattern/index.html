@@ -25,7 +25,7 @@
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-12/94032090.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-12/87960424.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-12/63555794.jpg">
-<meta property="og:updated_time" content="2015-10-12T09:12:41.537Z">
+<meta property="og:updated_time" content="2015-10-12T09:43:07.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android MVP模式 简单易懂的介绍方式">
 <meta name="twitter:description" content="Android MVP模式也不是什么新鲜的东西了，我在自己的项目了也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，MVP模式的优势就充分显示出来了。">
@@ -195,7 +195,12 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>Android <strong>MVP模式</strong>也不是什么新鲜的东西了，我在自己的项目了也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，<strong>MVP模式</strong>的优势就充分显示出来了。<br><a id="more"></a><br><em>导读：MVP模式是MVC模式在Android上的一种变体，介绍MVP就得先介绍MVC。在MVC模式中，Activity应该是属于View这一层。而实质上，它既承担了View，更多地却包含一些Controller的东西在里面。这对于开发与维护来说极度不利，耦合度大高了。把Activity的View和Controller抽离出来就变成了View和Presenter，这就是MVP模式。</em><br><h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是MVC模式"><span class="toc-text">什么是MVC模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重点要说的MVP模式"><span class="toc-text">重点要说的MVP模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式的作用"><span class="toc-text">MVP模式的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式的使用"><span class="toc-text">MVP模式的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式简单实例"><span class="toc-text">MVP模式简单实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a></li></ol></p>
+            <p>Android <strong>MVP模式</strong>也不是什么新鲜的东西了，我在自己的项目了也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，<strong>MVP模式</strong>的优势就充分显示出来了。<br><a id="more"></a><br><em>导读：MVP模式是MVC模式在Android上的一种变体，介绍MVP就得先介绍MVC。在MVC模式中，Activity应该是属于View这一层。而实质上，它既承担了View，更多地却包含一些Controller的东西在里面。这对于开发与维护来说极度不利，耦合度大高了。把Activity的View和Controller抽离出来就变成了View和Presenter，这就是MVP模式。</em><br><h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本信息"><span class="toc-text">基本信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#什么是MVC模式"><span class="toc-text">什么是MVC模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#重点要说的MVP模式"><span class="toc-text">重点要说的MVP模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式的作用"><span class="toc-text">MVP模式的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式的使用"><span class="toc-text">MVP模式的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式简单实例"><span class="toc-text">MVP模式简单实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a></li></ol></p>
+<h2 id="基本信息">基本信息</h2><ul>
+<li>作者：<a href="http://kaedea.com">Kaede Akatsuki</a></li>
+<li>项目：<a href="https://github.com/kaedea/Android-MVP-Pattern" target="_blank" rel="external">Android-MVP-Pattern</a></li>
+<li>出处：<a href="http://kaedea.com/2015/10/11/android-mvp-pattern">Android MVP模式 简单易懂的介绍方式</a></li>
+</ul>
 <h2 id="什么是MVC模式">什么是MVC模式</h2><p>MVP模式（Model-View-Presenter）可以说是MVC模式（Model-View-Controller）在Android开发上的一种变种、进化模式。后者大家可能比较熟悉，就算不熟悉也可能或多或少地在自己的项目中用到过。要介绍MVP模式，记不得不先说说MVC模式。MVC模式的结构分为三部分，实体层的Model，视图层的View，以及控制层的Controller层。</p>
 <p><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-10-11/13126761.jpg" alt="MVC结构"></p>
 <p>其中View层其实就是程序的UI界面，用于向用户展示数据以及接收用户的输入；而Model层就是JavaBean实体类，用于保存实例数据；Controller控制器用于更新UI界面和数据实例。</p>
