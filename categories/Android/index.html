@@ -163,12 +163,8 @@
 <section class="postShorten-group main-content-wrap">
     
         
-            
-                
-            
         
-        
-            <article class="postShorten postShorten--thumbnailimg" itemscope itemType="http://schema.org/BlogPosting">
+                <article class="postShorten" itemscope itemType="http://schema.org/BlogPosting">
         
             <div class="postShorten-wrap">
                 <div class="postShorten-header">
@@ -194,7 +190,8 @@
                 </div>
                 <div class="postShorten-excerpt" itemprop="articleBody">
                     
-                        <p>Android <strong>MVP模式</strong><sup>[1]</sup>也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，<strong>MVP模式</strong>的优势就充分显示出来了。<br>
+                        <p>Android <strong>MVP模式</strong><sup>[1]</sup>也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，<strong>MVP模式</strong>的优势就充分显示出来了。</p>
+<p>MVP模式是MVC模式在Android上的一种变体，要介绍MVP就得先介绍MVC。在MVC模式中，Activity应该是属于View这一层。而实质上，它既承担了View，同时也包含一些Controller的东西在里面。这对于开发与维护来说不太友好，耦合度大高了。把Activity的View和Controller抽离出来就变成了View和Presenter，这就是MVP模式.。<br>
                     
                     
                         
@@ -206,20 +203,11 @@
                 </div>
             </div>
             
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="http://7xih5c.com1.z0.glb.clouddn.com/15-10-11/76327834.jpg"/>
-                </div>
-                
-            
         </article>
     
         
-            
-                
-            
         
-        
-            <article class="postShorten postShorten--thumbnailimg" itemscope itemType="http://schema.org/BlogPosting">
+                <article class="postShorten" itemscope itemType="http://schema.org/BlogPosting">
         
             <div class="postShorten-wrap">
                 <div class="postShorten-header">
@@ -245,7 +233,14 @@
                 </div>
                 <div class="postShorten-excerpt" itemprop="articleBody">
                     
-                        <p>“工欲善其事，必先利其器。” 使用<code>Android模拟器</code>开发和调试应用肯定比使用真机方便。但相比<code>XCODE</code>的<code>IOS模拟器</code>，Android SDK自带的<code>AVD</code>实在不争气，不过一些第三方的模拟器却表现不俗！<br>
+                        <p>“工欲善其事，必先利其器。” 使用<code>Android模拟器</code>开发和调试应用肯定比使用真机方便。但相比<code>XCODE</code>的<code>IOS模拟器</code>，Android SDK自带的<code>AVD</code>实在不争气，不过一些第三方的模拟器却表现不俗！</p>
+<p>10年我开始接触Android开发时候，手头上甚至连一部低端的Android手机都没有，那时候用的是Android SDK自带的AVD模拟器，相信任何Android开发者都对这货深恶痛绝。一直以来，Android开发都有以下的毛病：</p>
+<ul>
+<li>AVD模拟器奇卡无比；</li>
+<li>使用USB数据线链接手机经常无法设别设备，adb容易抽风；</li>
+<li>Log日志输出不全；</li>
+</ul>
+<p>一直以来都想找一款能够顺畅运行APP的Android模拟器，以下就介绍几款比较给力的。<br>
                     
                     
                         
@@ -256,11 +251,6 @@
                     
                 </div>
             </div>
-            
-                <div class="postShorten-thumbnailimg">
-                    <img alt="" itemprop="image" src="http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/24858194.jpg"/>
-                </div>
-                
             
         </article>
     

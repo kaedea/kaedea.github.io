@@ -14,29 +14,29 @@
     
         <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="Android MVP模式[1]也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，MVP模式的优势就充分显示出来了。">
+    <meta name="description" content="Android MVP模式[1]也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，MVP模式的优势就充分显示出来了。
+MVP模式是MVC模式在Android上的一种变体，要介绍MVP就得先介绍MVC。在MVC模式中，Activity应该是属于View这一层。而实质上，它既承担了View，同时也包含一些Controller的东西">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Android MVP模式 简单易懂的介绍方式">
 <meta property="og:url" content="http://kaedea.com/2015/10/11/android-mvp-pattern/index.html">
 <meta property="og:site_name" content="Kaede's Studio">
-<meta property="og:description" content="Android MVP模式[1]也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，MVP模式的优势就充分显示出来了。">
+<meta property="og:description" content="Android MVP模式[1]也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，MVP模式的优势就充分显示出来了。
+MVP模式是MVC模式在Android上的一种变体，要介绍MVP就得先介绍MVC。在MVC模式中，Activity应该是属于View这一层。而实质上，它既承担了View，同时也包含一些Controller的东西">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-11/13126761.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-11/2114527.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-12/94032090.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-12/87960424.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-12/63555794.jpg">
-<meta property="og:updated_time" content="2015-10-31T10:47:32.809Z">
+<meta property="og:updated_time" content="2015-12-25T16:24:03.561Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android MVP模式 简单易懂的介绍方式">
-<meta name="twitter:description" content="Android MVP模式[1]也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，MVP模式的优势就充分显示出来了。">
+<meta name="twitter:description" content="Android MVP模式[1]也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，MVP模式的优势就充分显示出来了。
+MVP模式是MVC模式在Android上的一种变体，要介绍MVP就得先介绍MVC。在MVC模式中，Activity应该是属于View这一层。而实质上，它既承担了View，同时也包含一些Controller的东西">
     
     
     
         <meta property="og:image" content="/assets/images/avatar_01.png"/>
     
-    
-        <meta property="og:image" content="/2015/10/11/android-mvp-pattern/http://7xih5c.com1.z0.glb.clouddn.com/15-10-11/76327834.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://kaedea.com/2015/10/11/android-mvp-pattern/http://7xih5c.com1.z0.glb.clouddn.com/15-10-11/76327834.jpg" />
     
     
     
@@ -195,7 +195,9 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>Android <strong>MVP模式</strong><sup>[1]</sup>也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，<strong>MVP模式</strong>的优势就充分显示出来了。<br><a id="more"></a><br><em>导读：MVP模式是MVC模式在Android上的一种变体，要介绍MVP就得先介绍MVC。在MVC模式中，Activity应该是属于View这一层。而实质上，它既承担了View，同时也包含一些Controller的东西在里面。这对于开发与维护来说不太友好，耦合度大高了。把Activity的View和Controller抽离出来就变成了View和Presenter，这就是MVP模式。</em><br><h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本信息"><span class="toc-text">基本信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVC模式"><span class="toc-text">MVC模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式"><span class="toc-text">MVP模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式的作用"><span class="toc-text">MVP模式的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity_代码变得更加简洁"><span class="toc-text">Activity 代码变得更加简洁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方便进行单元测试"><span class="toc-text">方便进行单元测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#避免_Activity_的内存泄露"><span class="toc-text">避免 Activity 的内存泄露</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式的使用"><span class="toc-text">MVP模式的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式简单实例"><span class="toc-text">MVP模式简单实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录"><span class="toc-text">附录</span></a></li></ol></p>
+            <p>Android <strong>MVP模式</strong><sup>[1]</sup>也不是什么新鲜的东西了，我在自己的项目里也普遍地使用了这个设计模式。当项目越来越庞大、复杂，参与的研发人员越来越多的时候，<strong>MVP模式</strong>的优势就充分显示出来了。</p>
+<p>MVP模式是MVC模式在Android上的一种变体，要介绍MVP就得先介绍MVC。在MVC模式中，Activity应该是属于View这一层。而实质上，它既承担了View，同时也包含一些Controller的东西在里面。这对于开发与维护来说不太友好，耦合度大高了。把Activity的View和Controller抽离出来就变成了View和Presenter，这就是MVP模式.。<br><a id="more"></a></p>
+<h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本信息"><span class="toc-text">基本信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVC模式"><span class="toc-text">MVC模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式"><span class="toc-text">MVP模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式的作用"><span class="toc-text">MVP模式的作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Activity_代码变得更加简洁"><span class="toc-text">Activity 代码变得更加简洁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方便进行单元测试"><span class="toc-text">方便进行单元测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#避免_Activity_的内存泄露"><span class="toc-text">避免 Activity 的内存泄露</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式的使用"><span class="toc-text">MVP模式的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MVP模式简单实例"><span class="toc-text">MVP模式简单实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附录"><span class="toc-text">附录</span></a></li></ol>
 <h2 id="基本信息">基本信息</h2><ul>
 <li>作者：<a href="http://kaedea.com">Kaede Akatsuki</a></li>
 <li>项目：<a href="https://github.com/kaedea/Android-MVP-Pattern" target="_blank" rel="external">Android-MVP-Pattern</a></li>
@@ -305,7 +307,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/05/themia-demo-using-thmia/" data-tooltip="Hexo响应式主题 Themia">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/05/themia-demo-using-thmia/" data-tooltip="Hexo响应式主题 : Themia">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -387,7 +389,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/05/themia-demo-using-thmia/" data-tooltip="Hexo响应式主题 Themia">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/05/themia-demo-using-thmia/" data-tooltip="Hexo响应式主题 : Themia">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>

@@ -14,12 +14,14 @@
     
         <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="“工欲善其事，必先利其器。” 使用Android模拟器开发和调试应用肯定比使用真机方便。但相比XCODE的IOS模拟器，Android SDK自带的AVD实在不争气，不过一些第三方的模拟器却表现不俗！">
+    <meta name="description" content="“工欲善其事，必先利其器。” 使用Android模拟器开发和调试应用肯定比使用真机方便。但相比XCODE的IOS模拟器，Android SDK自带的AVD实在不争气，不过一些第三方的模拟器却表现不俗！
+10年我开始接触Android开发时候，手头上甚至连一部低端的Android手机都没有，那时候用的是Android SDK自带的AVD模拟器，相信任何Android开发者都对这货深恶痛绝。一直以来，">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="那些流畅的开发向Android模拟器">
 <meta property="og:url" content="http://kaedea.com/2015/08/19/android-smooth-emulator-for-develop/index.html">
 <meta property="og:site_name" content="Kaede's Studio">
-<meta property="og:description" content="“工欲善其事，必先利其器。” 使用Android模拟器开发和调试应用肯定比使用真机方便。但相比XCODE的IOS模拟器，Android SDK自带的AVD实在不争气，不过一些第三方的模拟器却表现不俗！">
+<meta property="og:description" content="“工欲善其事，必先利其器。” 使用Android模拟器开发和调试应用肯定比使用真机方便。但相比XCODE的IOS模拟器，Android SDK自带的AVD实在不争气，不过一些第三方的模拟器却表现不俗！
+10年我开始接触Android开发时候，手头上甚至连一部低端的Android手机都没有，那时候用的是Android SDK自带的AVD模拟器，相信任何Android开发者都对这货深恶痛绝。一直以来，">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/6282451.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/81557460.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/44012361.jpg">
@@ -31,18 +33,16 @@
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/17900798.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/0000.gif">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/35383762.jpg">
-<meta property="og:updated_time" content="2015-10-07T06:56:37.674Z">
+<meta property="og:updated_time" content="2015-12-25T16:29:41.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="那些流畅的开发向Android模拟器">
-<meta name="twitter:description" content="“工欲善其事，必先利其器。” 使用Android模拟器开发和调试应用肯定比使用真机方便。但相比XCODE的IOS模拟器，Android SDK自带的AVD实在不争气，不过一些第三方的模拟器却表现不俗！">
+<meta name="twitter:description" content="“工欲善其事，必先利其器。” 使用Android模拟器开发和调试应用肯定比使用真机方便。但相比XCODE的IOS模拟器，Android SDK自带的AVD实在不争气，不过一些第三方的模拟器却表现不俗！
+10年我开始接触Android开发时候，手头上甚至连一部低端的Android手机都没有，那时候用的是Android SDK自带的AVD模拟器，相信任何Android开发者都对这货深恶痛绝。一直以来，">
     
     
     
         <meta property="og:image" content="/assets/images/avatar_01.png"/>
     
-    
-        <meta property="og:image" content="/2015/08/19/android-smooth-emulator-for-develop/http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/24858194.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://kaedea.com/2015/08/19/android-smooth-emulator-for-develop/http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/24858194.jpg" />
     
     
     
@@ -201,14 +201,14 @@
     
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
-            <p>“工欲善其事，必先利其器。” 使用<code>Android模拟器</code>开发和调试应用肯定比使用真机方便。但相比<code>XCODE</code>的<code>IOS模拟器</code>，Android SDK自带的<code>AVD</code>实在不争气，不过一些第三方的模拟器却表现不俗！<br><a id="more"></a></p>
+            <p>“工欲善其事，必先利其器。” 使用<code>Android模拟器</code>开发和调试应用肯定比使用真机方便。但相比<code>XCODE</code>的<code>IOS模拟器</code>，Android SDK自带的<code>AVD</code>实在不争气，不过一些第三方的模拟器却表现不俗！</p>
 <p>10年我开始接触Android开发时候，手头上甚至连一部低端的Android手机都没有，那时候用的是Android SDK自带的AVD模拟器，相信任何Android开发者都对这货深恶痛绝。一直以来，Android开发都有以下的毛病：</p>
 <ul>
 <li>AVD模拟器奇卡无比；</li>
 <li>使用USB数据线链接手机经常无法设别设备，adb容易抽风；</li>
 <li>Log日志输出不全；</li>
 </ul>
-<p>一直以来都想找一款能够顺畅运行APP的Android模拟器，以下就介绍几款比较给力的。<br><h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#大名鼎鼎的Genymotion"><span class="toc-text">大名鼎鼎的Genymotion</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#特点"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何使用"><span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Genymotion无法启动"><span class="toc-text">Genymotion无法启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Genymotion无法安装Google_Play"><span class="toc-text">Genymotion无法安装Google Play</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#电脑上也可以玩Android游戏的BlueStacks"><span class="toc-text">电脑上也可以玩Android游戏的BlueStacks</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#如何使用-1"><span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不足之处"><span class="toc-text">不足之处</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#最适合开发的Android模拟器Droid4X"><span class="toc-text">最适合开发的Android模拟器Droid4X</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#特点-1"><span class="toc-text">特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何使用-2"><span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#不足之处-1"><span class="toc-text">不足之处</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></p>
+<p>一直以来都想找一款能够顺畅运行APP的Android模拟器，以下就介绍几款比较给力的。<br><a id="more"></a></p>
 <h3 id="大名鼎鼎的Genymotion">大名鼎鼎的<a href="https://www.genymotion.com/" target="_blank" rel="external">Genymotion</a></h3><p><a href="https://www.genymotion.com/" target="_blank" rel="external">Genymotion</a>是一款顺畅和容易（fast and easy-to-use）使用的Android模拟器，可以用来运行和调试你的APP。<a href="https://www.genymotion.com/" target="_blank" rel="external">Genymotion</a> 来自于<a href="http://androvm.org/blog/" target="_blank" rel="external">AndroVM</a> 这个开源项目，基于 x86 和 <a href="https://www.virtualbox.org/" target="_blank" rel="external">VirtualBox</a>，支持 OpenGL 加速，可以用于 <code>Mac/Win/Linux</code>。最近发布了新版，支持了 Android2.3/4.3，新增了拖拽安装 apk，移除了 Google 市场（后面提供解决方案）。另外增加了功能更丰富的<a href="https://shop.genymotion.com/index.php?controller=order-opc" target="_blank" rel="external">付费版</a>，个人可以继续使用免费版。</p>
 <h4 id="特点">特点</h4><ol>
 <li>超级流畅；</li>
@@ -295,7 +295,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/05/themia-demo-japanese-text/"  data-tooltip="Themia 演示 - 日本語サンプル">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/05/themia-demo-using-thmia/"  data-tooltip="Hexo响应式主题 : Themia">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -377,7 +377,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/09/05/themia-demo-japanese-text/"  data-tooltip="Themia 演示 - 日本語サンプル">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/10/05/themia-demo-using-thmia/"  data-tooltip="Hexo响应式主题 : Themia">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
