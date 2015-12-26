@@ -1956,6 +1956,8 @@ a.link-unstyled a.link:active {
     hypens: "auto"; }
   .postShorten .postShorten-excerpt {
     margin-top: 15px; }
+    .postShorten .postShorten-excerpt img {
+      max-width: 100%; }
   .postShorten .postShorten-content {
     margin-top: 25px; }
 
