@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Kaede&#39;s Studio">
+    <title>在XML布局里给View设置点击事件 - Kaede&#39;s Studio</title>
+    <meta name="author" content="Kaede Akatsuki">
+    
+        <link rel="icon" href="/assets/images/favicon2.png">
+    
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过android:onClick属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="在XML布局里给View设置点击事件">
+<meta property="og:url" content="http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/index.html">
+<meta property="og:site_name" content="Kaede's Studio">
+<meta property="og:description" content="Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过android:onClick属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。">
+<meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-12-22/30732155.jpg">
+<meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-12-22/51841820.jpg">
+<meta property="og:updated_time" content="2015-12-27T11:09:22.041Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在XML布局里给View设置点击事件">
+<meta name="twitter:description" content="Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过android:onClick属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。">
+    
+    
+    
+        <meta property="og:image" content="/assets/images/avatar_01.png"/>
+    
+    
+        <meta property="og:image" content="/2015/12/23/android-set-onclicklistener-in-xml/http://7xih5c.com1.z0.glb.clouddn.com/15-12-27/38510906.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/http://7xih5c.com1.z0.glb.clouddn.com/15-12-27/38510906.jpg" />
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox-thumbs.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/tranquilpeak.css" type="text/css">
+    <!--STYLES END-->
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Kaede&#39;s Studio</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+                <i class="fa fa-lg fa-search"></i>
+            </a>
+    
+</header>
+            <nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar_01.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name">Kaede Akatsuki</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-circle-thin"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-star-o"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archive</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-terminal"></i>
+                    <span class="sidebar-button-desc">Me</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/kaedea" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:kidhaibara@gmail.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-at"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            在XML布局里给View设置点击事件
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Wed Dec 23 2015 00:00:00 GMT+0800">
+	
+		    Dec 23, 2015
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Android/">Android</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过<code>android:onClick</code>属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。<br><a id="more"></a></p>
+<p>给一个View设置监听点击事件是再普通不过的事情，比如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">view.setOnClickListener(onClickListener);</span><br></pre></td></tr></table></figure></p>
+<p>另外一种做法是直接在XML布局里面指定View点击时候的回调方法，首先需要在Activity中编写用于回调的方法，比如<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClickView</span><span class="params">(View view)</span></span>&#123;</span><br><span class="line">	<span class="comment">// do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后在XML设置View的<code>android:onClick</code>属性<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">View</span></span><br><span class="line">    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span></span><br><span class="line">    <span class="attribute">android:onClick</span>=<span class="value">"onClickView"</span> /&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>有的时候从XML布局里直接设定点击事件会比较方便（特别是在写DEMO项目的时候），这种做法平时用的人并不多，从使用方式上大致能猜出来，View应该是在运行的时候，使用反射的方式从Activity找到“onClickView”方法并调用，因为这种做法并没有用到任何接口。</p>
+<p>接下来，我们可以从源码中分析出View是怎么触发回调方法的。</p>
+<p><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-12-22/30732155.jpg" alt=""><br>View有5个构造方法，第一个是内部使用的，平时在Java代码中直接创建View实例用的是第二种方法，而从XML布局渲染出来的View实例最后都是要调用第五种方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">View</span><span class="params">(Context context, @Nullable AttributeSet attrs, <span class="keyword">int</span> defStyleAttr, <span class="keyword">int</span> defStyleRes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> TypedArray a = context.obtainStyledAttributes(</span><br><span class="line">                attrs, com.android.internal.R.styleable.View, defStyleAttr, defStyleRes);</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> attr = a.getIndex(i);</span><br><span class="line">            <span class="keyword">switch</span> (attr) &#123;</span><br><span class="line">                ……</span><br><span class="line">                <span class="comment">// 处理onClick属性</span></span><br><span class="line">                <span class="keyword">case</span> R.styleable.View_onClick:</span><br><span class="line">                    <span class="keyword">if</span> (context.isRestricted()) &#123;</span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"The android:onClick attribute cannot "</span></span><br><span class="line">                                + <span class="string">"be used within a restricted context"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">final</span> String handlerName = a.getString(attr);</span><br><span class="line">                    <span class="keyword">if</span> (handlerName != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="comment">// 给当前View实例设置一个DeclaredOnClickListener监听器</span></span><br><span class="line">                        setOnClickListener(<span class="keyword">new</span> DeclaredOnClickListener(<span class="keyword">this</span>, handlerName));</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>处理onClick属性的时候，先判断View的Context是否isRestricted，如果是就抛出一个IllegalStateException异常。看看isRestricted方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * Indicates whether this Context is restricted.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; if this Context is restricted, &#123;<span class="doctag">@code</span> false&#125; otherwise.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@see</span> #CONTEXT_RESTRICTED</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRestricted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>isRestricted是用于判断当前的Context实例是否出于被限制的状态，按照官方的解释，处限制状态的Context，会忽略某些特点的功能，比如XML的某些属性，很明显，我们在研究的<code>android:onClick</code>属性也会被忽略。</p>
+<blockquote>
+<p>a restricted context may disable specific features. For instance, a View associated with a restricted context would ignore particular XML attributes.</p>
+</blockquote>
+<p>不过isRestricted方法是Context中为数不多的有具体实现的方法（其余基本是抽象方法），这里直接返回false，而且这个方法只有在ContextWrapper和MockContext中有重写<br><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-12-22/51841820.jpg" alt=""><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContextWrapper</span> <span class="keyword">extends</span> <span class="title">Context</span> </span>&#123;</span><br><span class="line">    Context mBase;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRestricted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mBase.isRestricted();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MockContext</span> <span class="keyword">extends</span> <span class="title">Context</span> </span>&#123;</span><br><span class="line">    <span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRestricted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsupportedOperationException();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ContextWrapper中也只是代理调用mBase的isRestricted，而MockContext是写单元测试的时候才会用到，所以这里的isRestricted基本只会返回false，除非使用了自定义的ContextWrapper并重写了isRestricted。<br>回到View，接着的<code>final String handlerName = a.getString(attr);</code>其实就是拿到了<code>android:onClick=&quot;onClickView&quot;</code>中的“onClickView”这个字符串，接着使用了当前View的实例和“onClickView”创建了一个DeclaredOnClickListener实例，并设置为当前View的点击监听器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">     * An implementation of OnClickListener that attempts to lazily load a</span><br><span class="line">     * named click handling method from a parent or ancestor context.</span><br><span class="line">     */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">DeclaredOnClickListener</span> <span class="keyword">implements</span> <span class="title">OnClickListener</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> View mHostView;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> String mMethodName;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> Method mMethod;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">DeclaredOnClickListener</span><span class="params">(@NonNull View hostView, @NonNull String methodName)</span> </span>&#123;</span><br><span class="line">            mHostView = hostView;</span><br><span class="line">            mMethodName = methodName;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="annotation">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(@NonNull View v)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (mMethod == <span class="keyword">null</span>) &#123;</span><br><span class="line">                mMethod = resolveMethod(mHostView.getContext(), mMethodName);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                mMethod.invoke(mHostView.getContext(), v);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (IllegalAccessException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(</span><br><span class="line">                        <span class="string">"Could not execute non-public method for android:onClick"</span>, e);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InvocationTargetException e) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(</span><br><span class="line">                        <span class="string">"Could not execute method for android:onClick"</span>, e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="annotation">@NonNull</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> Method <span class="title">resolveMethod</span><span class="params">(@Nullable Context context, @NonNull String name)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">while</span> (context != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!context.isRestricted()) &#123;</span><br><span class="line">                        <span class="keyword">return</span> context.getClass().getMethod(mMethodName, View.class);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (NoSuchMethodException e) &#123;</span><br><span class="line">                    <span class="comment">// Failed to find method, keep searching up the hierarchy.</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (context <span class="keyword">instanceof</span> ContextWrapper) &#123;</span><br><span class="line">                    context = ((ContextWrapper) context).getBaseContext();</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// Can't search up the hierarchy, null out and fail.</span></span><br><span class="line">                    context = <span class="keyword">null</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">final</span> <span class="keyword">int</span> id = mHostView.getId();</span><br><span class="line">            <span class="keyword">final</span> String idText = id == NO_ID ? <span class="string">""</span> : <span class="string">" with id '"</span></span><br><span class="line">                    + mHostView.getContext().getResources().getResourceEntryName(id) + <span class="string">"'"</span>;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Could not find method "</span> + mMethodName</span><br><span class="line">                    + <span class="string">"(View) in a parent or ancestor Context for android:onClick "</span></span><br><span class="line">                    + <span class="string">"attribute defined on view "</span> + mHostView.getClass() + idText);</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到这里就清楚了，当点击View的时候，DeclaredOnClickListener实例的“onClick”方法会被调用，接着会调用“resolveMethod”方法，使用反射的方式从View的Context中找一个叫“onClickView”方法，这个方法有一个View类型的参数，最后再使用反射调用该方法。要注意的是，“onClickView”方法必须是public类型的，不然反射调用时会抛出IllegalAccessException异常。</p>
+<p>同时从源码也能看出，使用<code>android:onClick</code>设置点击事件的方式是从Context里面查找回调方法的，所以如果对于在Fragment的XML里创建的View，是无法通过这种方式绑定Fragment中的回调方法的，因为Fragment自身并不是一个Context，这里的View的Context其实是FragmentActivity，这也意味着使用这种方式能够快速地从Fragment中回调到FragmentActivity。</p>
+<p>此外，从DeclaredOnClickListener类的注释也能看出<code>android:onClick</code>的功能，<strong>主要是起到懒加载的作用</strong>，只有到点击View的时候，才会知道哪个方法是用于点击回调的。</p>
+<p>最后，特别需要补充说明的是，使用<code>android:onClick</code>给View设置点击事件，就意味着要在Activity里添加一个非接口的public方法。现在Android的开发趋势是“不要把业务逻辑写在Activity类里面”，这样做有利于项目的维护，防止Activity爆炸，所以尽量不要在Activity里出现非接口、非生命周期的public方法。因此，贸然使用<code>android:onClick</code>可能会“污染”Activity。</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/android/">android</a> <a class="tag tag--primary tag--small t-link" href="/tags/xml/">xml</a> <a class="tag tag--primary tag--small t-link" href="/tags/点击事件/">点击事件</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/05/whisper-change-job/" data-tooltip="年轻人换工作不频繁难道换女票频繁么">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/&amp;title=在XML布局里给View设置点击事件">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2015 Kaede Akatsuki. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/05/whisper-change-job/" data-tooltip="年轻人换工作不频繁难道换女票频繁么">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/&amp;title=在XML布局里给View设置点击事件">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar_01.png"/>
+        
+            <h4 id="about-card-name">Kaede Akatsuki</h4>
+        
+            <h5 id="about-card-bio"><p>話は安いものですので、コードを表させてください！</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Android Developer</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Chiba Japan
+            </h5>
+        
+    </div>
+</div>
+
+        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-12-26/63612911.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/jquery.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.fancybox.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.fancybox-thumbs.js" type="text/javascript"></script>
+<script src="/assets/js/tranquilpeak.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kidhaibara';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','oCoTxxFvwzZyiv48ioJ5','2.0.0');
+    </script>
+
+
+</html>
