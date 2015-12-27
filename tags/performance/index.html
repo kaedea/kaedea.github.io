@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Kaede&#39;s Studio">
-    <title>All archives : 2015/8 - Kaede&#39;s Studio</title>
+    <title>Tag : performance - Kaede&#39;s Studio</title>
     <meta name="author" content="Kaede Akatsuki">
     
         <link rel="icon" href="/assets/images/favicon2.png">
@@ -17,7 +17,7 @@
     <meta name="description" content="話は安いものですので、コードを表させてください！">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Kaede's Studio">
-<meta property="og:url" content="http://kaedea.com/archives/2015/08/index.html">
+<meta property="og:url" content="http://kaedea.com/tags/performance/index.html">
 <meta property="og:site_name" content="Kaede's Studio">
 <meta property="og:description" content="話は安いものですので、コードを表させてください！">
 <meta name="twitter:card" content="summary">
@@ -170,13 +170,13 @@
                 <div class="postShorten-header">
                     <h1 class="postShorten-title" itemprop="headline">
                         
-                                <a class="link-unstyled" href="/2015/08/19/android-smooth-emulator-for-develop/">一些流畅的Android模拟器</a>
+                                <a class="link-unstyled" href="/2015/11/12/android-best-performance-points/">Anroid性能调优 技术优化点</a>
                         
                     </h1>
                     <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Wed Aug 19 2015 00:30:04 GMT+0800">
+    <time itemprop="datePublished" content="Thu Nov 12 2015 00:00:00 GMT+0800">
 	
-		    Aug 19, 2015
+		    Nov 12, 2015
     	
     </time>
     
@@ -190,18 +190,58 @@
                 </div>
                 <div class="postShorten-excerpt" itemprop="articleBody">
                     
-                        <p>“工欲善其事，必先利其器。” 使用<code>Android模拟器</code>开发和调试应用肯定比使用真机方便。但相比<code>XCODE</code>的<code>IOS模拟器</code>，Android SDK自带的<code>AVD</code>实在不争气，不过一些第三方的模拟器却表现不俗！</p>
-<p>10年我开始接触Android开发时候，手头上甚至连一部低端的Android手机都没有，那时候用的是Android SDK自带的AVD模拟器，相信任何Android开发者都对这货深恶痛绝。一直以来，Android开发都有以下的毛病：</p>
-<ul>
-<li>AVD模拟器奇卡无比；</li>
-<li>使用USB数据线链接手机经常无法设别设备，adb容易抽风；</li>
-<li>Log日志输出不全；</li>
-</ul>
-<p>一直以来都想找一款能够顺畅运行APP的Android模拟器，以下就介绍几款比较给力的。<br>
+                        <p>最近一个星期居然没有产品的需求，本来打算涂几个妹子过双11，突然想到许多新人进项目组后会把项目以前踩的坑给再次踩一边，特别是一些会引发性能问题的“有坏味道”的代码，虽然一点有问题的代码暂时不管也不会有多大的影响，但是“千里之堤，毁于蚁穴”，一旦问题严重了就不好处理了。不能指望每次都做好完整的Code Review，最好的做法是把“性能优化”的技术点总结一下，输出一个文档，给那些新加入的小伙伴们看看，免得重复踩坑。</p>
+<p>其实性能调优涉及到多方面的工作，一晚上也只能想到这么多，而且都是一些老生常谈、炒冷饭的东西，<strong>这个贴的目的在于想骗一些高质量的干货</strong>（我从未见过如此厚颜无耻之人+脑补诸葛孔明表情图），然后我再整合进来，接下来再把每一点都讲详细一点，配合项目中遇到的实例案例进行分析，最好再写个DEMO之类的放到Github骗骗粉之类的。</p>
+<p><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-11-8/98999837.jpg" alt="为了方便一些脑洞比较小的同学，特意找来一张"></p>
+<p>请大家补充要点啊，我一并处理。以下只是一时想到写的笔记，详细的分析还需要一点时间。<br>
                     
                     
                         
-                            <a href="/2015/08/19/android-smooth-emulator-for-develop/" class="postShorten-excerpt_link link ">Continue reading</a>
+                            <a href="/2015/11/12/android-best-performance-points/" class="postShorten-excerpt_link link ">Continue reading</a>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+            
+        </article>
+    
+        
+        
+                <article class="postShorten" itemscope itemType="http://schema.org/BlogPosting">
+        
+            <div class="postShorten-wrap">
+                <div class="postShorten-header">
+                    <h1 class="postShorten-title" itemprop="headline">
+                        
+                                <a class="link-unstyled" href="/2015/11/11/android-best-performance-whisper/">Anroid性能调优 一本正经的胡说八道</a>
+                        
+                    </h1>
+                    <div class="postShorten-meta">
+    <time itemprop="datePublished" content="Wed Nov 11 2015 00:00:00 GMT+0800">
+	
+		    Nov 11, 2015
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Android/">Android</a>
+
+
+    
+</div>
+                </div>
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    
+                        <p>“一本正经地胡说八道”用日语怎么说？大概是「真面目にふざけている」吧。这篇日志大概就是这么一个意思？</p>
+<p>一直以来都想对Android APP开发的性能调优做一下总结，其实性能调优涉及到多方面的工作，每次有一些心得我都会记录下来，零零散散记录了很多，最近发现许多地方重复了，感觉还是得做一下整理的，知识就是这么牢固起来的。</p>
+<p>“APP卡顿”是一个问题，我们既需要知道怎么查找出哪里造成卡顿，也需要掌握规避这些卡顿的技巧，所以这个话题可以分为“如何定位APP中的性能问题”和“提高性能需要注意哪些点”这两部分，后续在陆续对这两点展开讨论吧，今天先从整体分析下问题存在的原因。<br>
+                    
+                    
+                        
+                            <a href="/2015/11/11/android-best-performance-whisper/" class="postShorten-excerpt_link link ">Continue reading</a>
                             
                         
                     
@@ -220,7 +260,6 @@
 </div>
 
 </section>
-
 
 
                 <footer id="footer" class="main-content-wrap">
