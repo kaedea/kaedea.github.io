@@ -2300,11 +2300,10 @@ blockquote {
     padding: 0 0.3em; }
 
 .float-about-weibo {
-  max-width: 280px;
-  max-height: 470px;
   float: none;
   margin-left: 10px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  margin-top: -35px; }
 
 .float-cv-avatar {
   float: right;
@@ -2314,9 +2313,7 @@ blockquote {
 @media only screen and (max-width: 479px) {
   .float-cv-avatar {
     float: none;
-    margin-top: -30px; }
-  .float-about-weibo {
-    margin-top: -35px; } }
+    margin-top: -30px; } }
 
 @media only screen and (max-width: 767px) {
   body {
@@ -2360,6 +2357,7 @@ blockquote {
 
 @media only screen and (min-width: 1400px) {
   .float-about-weibo {
+    float: right;
     max-width: 0px;
     max-height: 0px; } }
 
