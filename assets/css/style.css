@@ -2313,8 +2313,10 @@ blockquote {
 
 @media only screen and (max-width: 479px) {
   .float-cv-avatar {
-    max-width: 0px;
-    max-height: 0px; } }
+    float: none;
+    margin-top: -30px; }
+  .float-about-weibo {
+    margin-top: -35px; } }
 
 @media only screen and (max-width: 767px) {
   body {
@@ -2346,9 +2348,7 @@ blockquote {
   h5 {
     font-size: 1.55rem; }
   h6 {
-    font-size: 1.45rem; } }
-
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    font-size: 1.45rem; }
   .float-about-weibo {
     float: right;
     margin-top: -75px; } }
