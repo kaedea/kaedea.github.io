@@ -169,10 +169,12 @@ blockquote {
     padding: 0 0.3em; }
 
 .float-about-weibo {
+  background-color: #555555;
+  max-width: 280px;
+  max-height: 510px;
   float: none;
   margin-left: 10px;
-  margin-bottom: 10px;
-  margin-top: -35px; }
+  margin-bottom: 10px; }
 
 .float-cv-avatar {
   float: right;
@@ -181,8 +183,8 @@ blockquote {
 
 @media only screen and (max-width: 479px) {
   .float-cv-avatar {
-    float: none;
-    margin-top: -30px; } }
+    max-width: 0px;
+    max-height: 0px; } }
 
 @media only screen and (max-width: 767px) {
   body {
@@ -214,7 +216,9 @@ blockquote {
   h5 {
     font-size: 1.55rem; }
   h6 {
-    font-size: 1.45rem; }
+    font-size: 1.45rem; } }
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
   .float-about-weibo {
     float: right;
     margin-top: -75px; } }
@@ -226,7 +230,6 @@ blockquote {
 
 @media only screen and (min-width: 1400px) {
   .float-about-weibo {
-    float: right;
     max-width: 0px;
     max-height: 0px; } }
 
