@@ -220,15 +220,16 @@ blockquote {
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .float-about-weibo {
     float: right;
-    margin-top: -75px; } }
+    margin-top: -50px; } }
 
 @media only screen and (min-width: 1024px) and (max-width: 1399px) {
   .float-about-weibo {
     float: right;
-    margin-top: -75px; } }
+    margin-top: -50px; } }
 
 @media only screen and (min-width: 1400px) {
   .float-about-weibo {
+    float: right;
     max-width: 0px;
     max-height: 0px; } }
 
