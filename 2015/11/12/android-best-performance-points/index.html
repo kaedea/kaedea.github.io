@@ -21,7 +21,7 @@
 <meta property="og:site_name" content="Kaede's Studio">
 <meta property="og:description" content="最近一个星期居然没有产品的需求，本来打算涂几个妹子过双11，突然想到许多新人进项目组后会把项目以前踩的坑给再次踩一边，特别是一些会引发性能问题的“有坏味道”的代码，虽然一点有问题的代码暂时不管也不会有多大的影响，但是“千里之堤，毁于蚁穴”，一旦问题严重了就不好处理了。不能指望每次都做好完整的Code Review，最好的做法是把“性能优化”的技术点总结一下，输出一个文档，给那些新加入的小伙伴们看看">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-11-8/98999837.jpg">
-<meta property="og:updated_time" content="2016-01-03T07:56:50.909Z">
+<meta property="og:updated_time" content="2016-01-05T15:46:35.663Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Anroid性能调优 技术优化点">
 <meta name="twitter:description" content="最近一个星期居然没有产品的需求，本来打算涂几个妹子过双11，突然想到许多新人进项目组后会把项目以前踩的坑给再次踩一边，特别是一些会引发性能问题的“有坏味道”的代码，虽然一点有问题的代码暂时不管也不会有多大的影响，但是“千里之堤，毁于蚁穴”，一旦问题严重了就不好处理了。不能指望每次都做好完整的Code Review，最好的做法是把“性能优化”的技术点总结一下，输出一个文档，给那些新加入的小伙伴们看看">
@@ -191,11 +191,8 @@
             <p>最近一个星期居然没有产品的需求，本来打算涂几个妹子过双11，突然想到许多新人进项目组后会把项目以前踩的坑给再次踩一边，特别是一些会引发性能问题的“有坏味道”的代码，虽然一点有问题的代码暂时不管也不会有多大的影响，但是“千里之堤，毁于蚁穴”，一旦问题严重了就不好处理了。不能指望每次都做好完整的Code Review，最好的做法是把“性能优化”的技术点总结一下，输出一个文档，给那些新加入的小伙伴们看看，免得重复踩坑。</p>
 <p>其实性能调优涉及到多方面的工作，一晚上也只能想到这么多，而且都是一些老生常谈、炒冷饭的东西，<strong>这个贴的目的在于想骗一些高质量的干货</strong>（我从未见过如此厚颜无耻之人+脑补诸葛孔明表情图），然后我再整合进来，接下来再把每一点都讲详细一点，配合项目中遇到的实例案例进行分析，最好再写个DEMO之类的放到Github骗骗粉之类的。</p>
 <p><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-11-8/98999837.jpg" alt="为了方便一些脑洞比较小的同学，特意找来一张"></p>
-<p>请大家补充要点啊，我一并处理。以下只是一时想到写的笔记，详细的分析还需要一点时间。</p>
-<a id="more"></a>
-<h2>要点</h2>
-<h3>使用异步</h3>
-<ul>
+<p>请大家补充要点啊，我一并处理。以下只是一时想到写的笔记，详细的分析还需要一点时间。<br><a id="more"></a></p>
+<h2 id="u8981_u70B9"><a href="#u8981_u70B9" class="headerlink" title="要点"></a>要点</h2><h3 id="u4F7F_u7528_u5F02_u6B65"><a href="#u4F7F_u7528_u5F02_u6B65" class="headerlink" title="使用异步"></a>使用异步</h3><ul>
 <li>保持APP的高度响应，不要在UI线程做耗时操作，多使用异步任务</li>
 <li>使用线程时要做好线程控制；使用队列、线程池</li>
 <li>谨慎使用糟糕的AysncTask、Timer</li>
@@ -206,8 +203,7 @@
 <li>HTTP和图片下载尽量使用同一套网络请求</li>
 <li>使用MVP模式规范大型Activity类的行为，避免异步任务造成的内存泄露</li>
 </ul>
-<h3>避免内存泄露</h3>
-<ul>
+<h3 id="u907F_u514D_u5185_u5B58_u6CC4_u9732"><a href="#u907F_u514D_u5185_u5B58_u6CC4_u9732" class="headerlink" title="避免内存泄露"></a>避免内存泄露</h3><ul>
 <li>了解虚拟机内存回收机制</li>
 <li>频繁GC也会造成卡顿，避免不必要的内存开销</li>
 <li>错误的引用姿♂势造成的内存泄露（啊~要泄了~）</li>
@@ -218,8 +214,7 @@
 <li>使用LeakCanary自动检查Activity泄露问题</li>
 <li>对内存负载要保持敏感（Sharp）</li>
 </ul>
-<h3>视图优化</h3>
-<ul>
+<h3 id="u89C6_u56FE_u4F18_u5316"><a href="#u89C6_u56FE_u4F18_u5316" class="headerlink" title="视图优化"></a>视图优化</h3><ul>
 <li>布局优化、减少层次，Include Merge</li>
 <li>使用ViewStub避免不必要的LayoutInflate，使用GONE代替重复LayoutInflate同一个布局</li>
 <li>避免过度绘制，应该减少不必要的布局背景；布局层次太深会造成过度绘制以及Measure、Layout等方法时间复杂度的指数增长</li>
@@ -228,8 +223,7 @@
 <li>复杂动画使用SurfaceView或TextureView</li>
 <li>尽量提供多套分辨率的图片，使用矢量图</li>
 </ul>
-<h3>Adapter优化</h3>
-<ul>
+<h3 id="Adapter_u4F18_u5316"><a href="#Adapter_u4F18_u5316" class="headerlink" title="Adapter优化"></a>Adapter优化</h3><ul>
 <li>复用convertView，用ViewHolder代替频繁findViewById</li>
 <li>不要重复setListener，要使用v.getId来复用Listener，不然会创建一堆Listener导致频繁GC</li>
 <li>多布局要采用MultiItemView，而不是使用一个大布局然后动态控制需要现实的部分</li>
@@ -237,8 +231,7 @@
 <li>快速滚动列表的时候，可以停止加载列表项的图片，停止列表项的动画，不要在这时候改变列表项的布局</li>
 <li>尽量用RecyclerView（增量Notify和RecycledViewPool带你飞）</li>
 </ul>
-<h3>代码优化</h3>
-<ul>
+<h3 id="u4EE3_u7801_u4F18_u5316"><a href="#u4EE3_u7801_u4F18_u5316" class="headerlink" title="代码优化"></a>代码优化</h3><ul>
 <li>算法优化，减少时间复杂度，参考一些经典的优化算法</li>
 <li>尽量使用int，而不是float或者double</li>
 <li>尽量采用基本类型，避免无必要的自动装箱和拆箱，浪费时间和空间</li>
@@ -254,24 +247,21 @@
 <li>遍历集合时，使用i++代替Iterator，后者需要额外的对象操作，应在循环体内避免这种情况</li>
 <li>如果一个基本类型或者String的值不会改变，尽量用final static，编译时会直接用变量的值替换变量，也就不需要在查询变量的值了</li>
 </ul>
-<h3>其他优化</h3>
-<ul>
+<h3 id="u5176_u4ED6_u4F18_u5316"><a href="#u5176_u4ED6_u4F18_u5316" class="headerlink" title="其他优化"></a>其他优化</h3><ul>
 <li>数据库优化：使用索引、使用异步线程</li>
 <li>网络优化 …… 一堆优秀的轮子</li>
 <li>避免过度使用依赖注入框架，大量的反射</li>
 <li>不过过度设计/抽象，多态看起来很有设计感，代价就是额外的代码、空间、时间</li>
 <li>尽量不要开启多进程，进程的开销很大</li>
 </ul>
-<h3>APK瘦身</h3>
-<ul>
+<h3 id="APK_u7626_u8EAB"><a href="#APK_u7626_u8EAB" class="headerlink" title="APK瘦身"></a>APK瘦身</h3><ul>
 <li>开启混淆</li>
 <li>使用zipalign工具优化APK</li>
 <li>适当有损图片压缩、使用矢量图</li>
 <li>删除项目中冗余的资源，之前写过一些删除没有res资源的脚本</li>
 <li>动态加载模块化，项目拆分啊！</li>
 </ul>
-<h3>性能问题的排查方法</h3>
-<ul>
+<h3 id="u6027_u80FD_u95EE_u9898_u7684_u6392_u67E5_u65B9_u6CD5"><a href="#u6027_u80FD_u95EE_u9898_u7684_u6392_u67E5_u65B9_u6CD5" class="headerlink" title="性能问题的排查方法"></a>性能问题的排查方法</h3><ul>
 <li>GPU条形图，没事开来看看淘宝</li>
 <li>过度绘制颜色，嗯，不要一片姨妈红就好</li>
 <li>LeakCanary，自动检测Activity泄露，挺好用的</li>
