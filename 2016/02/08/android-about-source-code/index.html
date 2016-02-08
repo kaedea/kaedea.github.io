@@ -1,0 +1,451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Kaede&#39;s Studio">
+    <title>有没有必要阅读Android源码 - Kaede&#39;s Studio</title>
+    <meta name="author" content="Kaede Akatsuki">
+    
+        <link rel="icon" href="/assets/images/favicon2.png">
+    
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="或许对于许多Android开发者来说，所谓的Android工程师的工作“不过就是用XML实现设计师的美术图，用JSON解析服务器的数据，再把数据显示到界面上”就好了，源码什么的，看也好不看也罢，反正应用层的开发用不上，再加上现在优秀的轮子越来越多，拿来主义泛滥，能用就是，反正老板也不关系是不是你自己写的，用我现在大的话来说，阅读源码似乎只是一种“锦上添花”的事，有自然好，没有也罢。
+那么，作为An">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="有没有必要阅读Android源码">
+<meta property="og:url" content="http://kaedea.com/2016/02/08/android-about-source-code/index.html">
+<meta property="og:site_name" content="Kaede's Studio">
+<meta property="og:description" content="或许对于许多Android开发者来说，所谓的Android工程师的工作“不过就是用XML实现设计师的美术图，用JSON解析服务器的数据，再把数据显示到界面上”就好了，源码什么的，看也好不看也罢，反正应用层的开发用不上，再加上现在优秀的轮子越来越多，拿来主义泛滥，能用就是，反正老板也不关系是不是你自己写的，用我现在大的话来说，阅读源码似乎只是一种“锦上添花”的事，有自然好，没有也罢。
+那么，作为An">
+<meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/16-2-8/20986738.jpg">
+<meta property="og:updated_time" content="2016-02-08T16:15:45.110Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="有没有必要阅读Android源码">
+<meta name="twitter:description" content="或许对于许多Android开发者来说，所谓的Android工程师的工作“不过就是用XML实现设计师的美术图，用JSON解析服务器的数据，再把数据显示到界面上”就好了，源码什么的，看也好不看也罢，反正应用层的开发用不上，再加上现在优秀的轮子越来越多，拿来主义泛滥，能用就是，反正老板也不关系是不是你自己写的，用我现在大的话来说，阅读源码似乎只是一种“锦上添花”的事，有自然好，没有也罢。
+那么，作为An">
+    
+    
+    
+        <meta property="og:image" content="/assets/images/avatar_01.png"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    <!--STYLES END-->
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">Kaede&#39;s Studio</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+                <i class="fa fa-lg fa-search"></i>
+            </a>
+    
+</header>
+            <nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar_01.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name">Kaede Akatsuki</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-circle-thin"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-star-o"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archive</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-terminal"></i>
+                    <span class="sidebar-button-desc">Me</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/kaedea" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="mailto:kidhaibara@gmail.com" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-at"></i>
+                    <span class="sidebar-button-desc">Mail</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            有没有必要阅读Android源码
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Mon Feb 08 2016 00:00:00 GMT+0800">
+	
+		    Feb 08, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Android/">Android</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p><img src="http://7xih5c.com1.z0.glb.clouddn.com/16-2-8/20986738.jpg" alt=""><br>或许对于许多Android开发者来说，所谓的Android工程师的工作“不过就是用XML实现设计师的美术图，用JSON解析服务器的数据，再把数据显示到界面上”就好了，源码什么的，看也好不看也罢，反正应用层的开发用不上，再加上现在优秀的轮子越来越多，拿来主义泛滥，能用就是，反正老板也不关系是不是你自己写的，用我现在大的话来说，阅读源码似乎只是一种“锦上添花”的事，有自然好，没有也罢。</p>
+<p>那么，作为Android开发者的自我修养，到底有没有必要阅读AOSP以及其他开源项目的源码呢？<br><a id="more"></a></p>
+<h2 id="u521A_u5F00_u59CB_u65F6_u5019_u7684_u6545_u4E8B"><a href="#u521A_u5F00_u59CB_u65F6_u5019_u7684_u6545_u4E8B" class="headerlink" title="刚开始时候的故事"></a>刚开始时候的故事</h2><p>对于我来说，选择编程是因为我看见了MoeLoader这款收图软件实在是漂亮才开始写代码，我要的目的只是应用漂亮，不用在乎代码写成什么样，而且我觉得代码是我写的，这么辛苦的作品可不能白白开源给别人看。所以对于这个时候的我，那时候虽然没有考虑过类似的问题，但是很可能觉得阅读源码是没有必要的。</p>
+<p>后来我开始学习Android，原因非常简单，C#根本无法找到合适的工作，而学生党我的我根本无法买得起苹果三套件，此外，IE6的兼容工作让我实在是对前端敬而远之，所以选择只剩下Android了。说实在的，一开始我是不太喜欢Android开发，特别是IDE从Visual Studio切换到万恶的Eclipse，丑，卡顿，懂不懂就找不到依赖，甚至有时候编译一直报红Error，定位了半天找不到问题，到最后把红色的Error删除掉后居然就编译通过了！这时候的我，别说阅读源码了，我只求同一份代码在运行的时候有同样的逻辑就好。</p>
+<p>再到后来，我已经有一些Android程序设计的经验了，IDE也开始换到Android Studio（Preview版本刚出来的时候，我在Android Studio和Eclipse之间切换过好几次，不得不说习惯这种东西有时很有帮助，有时候也会很可怕），换到Android Studio很大一个原因是因为Github上面许多开源项目用Android Studio来部署很方便。这个时候我接触的开源项目已经比较多了，许多时候一些开源项目总有一些BUG，我会给其提交ISSUE，不过更多时候我不能等项目所有者来解决，需要我自己解决BUG；许多时候开源项目并不能直接满足业务的需要，所以我也需要先阅读源码再改造成自己的项目能用的。</p>
+<p>这里需要特别说明的是，我的第一份工作的项目是一个SDK项目，整体使用了基于ClassLoader的动态加载的框架。那时候还比较早，国外对动态加载不感兴趣，国内的话也只有零星的技术博客对这有讨论，不过大多是介绍如何实现动态加载而没有分析其工作机制，所以，当有新的技术需求，或者项目出现BUG的时候，我都需要自己阅读源码去解决问题。比如，有一次设计师需要一个全圆角的菜单背景，然而Android的点九图是X轴和Y轴需要拉伸的，当Y轴拉伸的时候就无法实现全圆角。我能做的就是，先把点九图的原图等比缩放到Y轴填满，这样Y轴就不会被拉伸了，但是原图缩放后，点九图X轴的拉伸却出现了扭曲的样式。通过阅读NinePatchDrawable的源码，我发现点九图的原理就是一个普通的Drawable加上一个用于描述拉伸坐标的数组chunk，当我缩放Drawable的时候，也必须更新chunk，不然拉伸的坐标就对不上，后面通过阅读源码中关于chunk的描述，把对应的拉伸坐标更新后，<strong>全圆角的点九图</strong> 也就实现了。</p>
+<h2 id="u4E3A_u4EC0_u4E48_u8981_u9605_u8BFB_u6E90_u7801"><a href="#u4E3A_u4EC0_u4E48_u8981_u9605_u8BFB_u6E90_u7801" class="headerlink" title="为什么要阅读源码"></a>为什么要阅读源码</h2><p>说了这么多，到底有没有必要阅读源码？有必要，而且非常有必要！原因有三。</p>
+<h3 id="u5176_u4E00_uFF0C_u4E86_u89E3_u57FA_u5C42_uFF0C_u9AD8_u5C42_u624D_u80FD_u66F4_u597D_u5730_u5DE5_u4F5C_u3002"><a href="#u5176_u4E00_uFF0C_u4E86_u89E3_u57FA_u5C42_uFF0C_u9AD8_u5C42_u624D_u80FD_u66F4_u597D_u5730_u5DE5_u4F5C_u3002" class="headerlink" title="其一，了解基层，高层才能更好地工作。"></a>其一，了解基层，高层才能更好地工作。</h3><p>比如，了解View的绘制过程，了解TouchEvent的分发和拦截过程的细节，才能写出酷炫的UI，要不然，只知道大概的原理的话，你可能要在“无法接收到触摸事件”或者“滑动事件和点击事件冲突”的这些问题上折腾半天。</p>
+<p>又比如，如果哪里出现异常，你能快速定位到源码抛异常类的地方，就能快速解决BUG，对症下药，一招撂倒，有些时候，修复BUG的时间不是用在解决问题上，而是用在定位问题上。</p>
+<p>这里有必要提一下，当Logcat把异常的栈信息打印出来的时候，有些异常出现的原因并不真的是Logcat的信息里描述的原因，因为Logcat里的异常的信息也只是由系统源码打印出来的，而这些源码大多时候只是普通的Java代码，和你自己写的没什么区别，如果源码抛出异常的代码的逻辑不够严谨的话，那实际的异常和Logcat里描述的异常可能对不上。比如之前搞动态加载的时候，在使用LayoutInflator渲染一个外部的XML布局时，抛了一个“Class not found”的异常，我要渲染的类可是LinearLayout啊，怎么可能没有！定位到源码里才发现，这里只要是类渲染失败就会抛这个异常，再定位到具体抛异常的地方，发现实际是Dimens资源找不到，困扰半年的问题立刻解决。</p>
+<h3 id="u5176_u4E8C_uFF0C_u80FD_u591F_u7406_u89E3Android_u8BBE_u8BA1_u8005_u7684_u610F_u56FE_u3002"><a href="#u5176_u4E8C_uFF0C_u80FD_u591F_u7406_u89E3Android_u8BBE_u8BA1_u8005_u7684_u610F_u56FE_u3002" class="headerlink" title="其二，能够理解Android设计者的意图。"></a>其二，能够理解Android设计者的意图。</h3><p>这个描述可能不好，比如说，许多人都觉得Android开发其实就是Java开发，通过阅读Context类的设计，你能够理解Google是如何在Java的基础上加上Android的特性的，你能够理解Context被叫做“环境”的原因。此外，阅读Activity/Service的源码，你能理解到四大组件类明明就是普通的JAVA类，为什么他们就是组件而别的类就不是组件。阅读Handler/Message/Looper的源码，你还能理解到Handler的精髓，数据驱动比事件驱动更适合用于设计需要经常改动的框架。阅读源码，你能知道Android是怎么管理Window以及向控制View的触摸事件的，你能知道基本上所有的res资源都有等价的Java代码的实现方式，你还能知道Dalvik是怎么无缝向ART过度的，在看通的那一瞬间，保证你觉得“水可载舟，亦可赛艇”！</p>
+<h3 id="u5176_u4E09_uFF0C_u80FD_u591F_u5B66_u4E60_u4F18_u79C0_u5F00_u6E90_u9879_u76EE_u7684_u4EE3_u7801_u98CE_u683C_u548C_u8BBE_u8BA1_u7406_u5FF5"><a href="#u5176_u4E09_uFF0C_u80FD_u591F_u5B66_u4E60_u4F18_u79C0_u5F00_u6E90_u9879_u76EE_u7684_u4EE3_u7801_u98CE_u683C_u548C_u8BBE_u8BA1_u7406_u5FF5" class="headerlink" title="其三，能够学习优秀开源项目的代码风格和设计理念"></a>其三，能够学习优秀开源项目的代码风格和设计理念</h3><p>这也是最重要的，看多了源码之后，你会发现所谓的源码也不过是普通的的Java代码，在不知不觉中受到这些优秀设计思想的影响。相信许多人在看 <strong>Volley</strong> 源码此前，对异步任务控制的想法基本就是毫无想法，看完之后简直是醍醐灌顶，原来代码也能写得这么有魅力，再看看自己之前写的异步任务，“new Thread().start”…，简直是“too young, sometime navie”有没有。</p>
+<p>看了越来越多Android的源码，自己的写应用的时候，也就能写出更加“Best Performance”的代码，见识了越来越多的开源项目，自己也能够更容易找到最符合自己应用的框架和技术方案，学习了越来越多的优秀的代码风格，自己也就更能写出漂亮以及容易扩展的代码。</p>
+<p>或许对许多做Android开发来说，平时的工作就是按照设计的图写个布局，再解析后台的数据，下班了把测试用的安卓机扔进抽屉拿出自己的苹果手机…… 但有时候花点时间看看源码，或许会觉得设计代码还是挺有意思的，特别是，当你花了两天的时间构思代码，再花两天的时间写代码，这时你可能觉得你还有许多代码要写，但是突然发现只要把你写好的接口衔接一下就都完成了，而且写了两天的代码居然一次编译通过！更甚，产品突然改了个需求，你在抱怨了一顿后发现只要花10分钟把原来的接口换个实现就搞定了，这或许是程序员工作中为数不多的乐趣吧。</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/android/">android</a> <a class="tag tag--primary tag--small t-link" href="/tags/源码/">源码</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/02/07/android-dynamical-loading-02-classloader/" data-tooltip="Android动态加载技术 ClassLoader的工作机制">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2016/02/08/android-about-source-code/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/02/08/android-about-source-code/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2016/02/08/android-about-source-code/&amp;title=有没有必要阅读Android源码">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Kaede Akatsuki. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/02/07/android-dynamical-loading-02-classloader/" data-tooltip="Android动态加载技术 ClassLoader的工作机制">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2016/02/08/android-about-source-code/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/02/08/android-about-source-code/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2016/02/08/android-about-source-code/&amp;title=有没有必要阅读Android源码">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://kaedea.com/2016/02/08/android-about-source-code/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://kaedea.com/2016/02/08/android-about-source-code/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/02/08/android-about-source-code/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar_01.png"/>
+        
+            <h4 id="about-card-name">Kaede Akatsuki</h4>
+        
+            <h5 id="about-card-bio"><p>話は安いものですので、コードを表させてください！</p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Android Developer</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                Chiba Japan
+            </h5>
+        
+    </div>
+</div>
+
+        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-12-26/63612911.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kidhaibara';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','oCoTxxFvwzZyiv48ioJ5','2.0.0');
+    </script>
+
+
+</html>
