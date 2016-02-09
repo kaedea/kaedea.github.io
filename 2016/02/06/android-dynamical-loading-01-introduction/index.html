@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="Kaede's Studio">
 <meta property="og:description" content="我们很早开始就在Android项目中采用了动态加载技术，主要目的是为了达到让用户不用重新安装APK就能升级应用的功能（特别是 SDK项目），这样一来不但可以大大提高应用新版本的覆盖率，也减少了服务器对旧版本接口兼容的压力，同时如果也可以快速修复一些线上的BUG。
 这种技术并不是常规的Android开发方式，早期并没有完善的解决方案。从“不明觉厉”到稳定投入生产，一直以来我总想对此编写一些文档，这也">
-<meta property="og:updated_time" content="2016-02-06T18:42:14.209Z">
+<meta property="og:updated_time" content="2016-02-08T17:55:39.035Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android动态加载技术 简单易懂的介绍方式">
 <meta name="twitter:description" content="我们很早开始就在Android项目中采用了动态加载技术，主要目的是为了达到让用户不用重新安装APK就能升级应用的功能（特别是 SDK项目），这样一来不但可以大大提高应用新版本的覆盖率，也减少了服务器对旧版本接口兼容的压力，同时如果也可以快速修复一些线上的BUG。
@@ -306,7 +306,7 @@
 <li><a href="https://github.com/limpoxe/Android-Plugin-Framework" target="_blank" rel="external">Android-Plugin-Framework</a></li>
 </ul>
 <h2 id="u811A_u6CE8"><a href="#u811A_u6CE8" class="headerlink" title="脚注"></a>脚注</h2><!-- footnotes -->
-<footer class="footnotes"><br><a id="f1" href="#a1">[1]</a> 其实也说不上什么模式，这不过这些动态加载的开发方式都有自己明显的特征，所以姑且用“形式或者模式”来称呼好了。<br><br><a id="f2" href="#a2">[2]</a> 为了方便区分概念，阐述一些术语：<br><br>宿主：Host，主项目APK、主APK，也就是我们希望采用动态加载技术的主项目；<br>插件：Plugin，可以是dex、jar或者apk文件，从主项目分离开来，我们能通过动态加载加载到主项目里面来的模块，一个主APK可以同时加载多个插件APK；<br><br></footer>
+<footer class="footnotes"><br><a id="f1" href="#a1">[1]</a> 其实也说不上什么模式，这不过这些动态加载的开发方式都有自己明显的特征，所以姑且用“形式或者模式”来称呼好了。<br><br><a id="f2" href="#a2">[2]</a> 为了方便区分概念，阐述一些术语：<br>宿主：Host，主项目APK、主APK，也就是我们希望采用动态加载技术的主项目；<br>插件：Plugin，可以是dex、jar或者apk文件，从主项目分离开来，我们能通过动态加载加载到主项目里面来的模块，一个主APK可以同时加载多个插件APK；<br><br></footer>
 
 
 
@@ -315,8 +315,8 @@
 .footnotes {
     // border-top: 1px solid #ccc;
     font-size: 1.4rem;
-    // margin-top: 3rem;
-    // padding-top: 1.5rem;
+    margin-top: -2rem;
+    //padding-top: 1.5rem;
 }
 }
 </style>
