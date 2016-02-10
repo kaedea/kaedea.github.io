@@ -23,7 +23,7 @@
 <meta property="og:description" content="或许对于许多Android开发者来说，所谓的Android工程师的工作“不过就是用XML实现设计师的美术图，用JSON解析服务器的数据，再把数据显示到界面上”就好了，源码什么的，看也好不看也罢，反正应用层的开发用不上，再加上现在优秀的轮子越来越多，拿来主义泛滥，能用就是，反正老板也不关心是不是你自己写的，用我现在老大的话来说，阅读源码似乎只是一种“锦上添花”的事，有自然好，没有也罢。
 那么，作为A">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/16-2-8/20986738.jpg">
-<meta property="og:updated_time" content="2016-02-08T16:41:53.280Z">
+<meta property="og:updated_time" content="2016-02-10T07:21:44.843Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="有没有必要阅读Android源码">
 <meta name="twitter:description" content="或许对于许多Android开发者来说，所谓的Android工程师的工作“不过就是用XML实现设计师的美术图，用JSON解析服务器的数据，再把数据显示到界面上”就好了，源码什么的，看也好不看也罢，反正应用层的开发用不上，再加上现在优秀的轮子越来越多，拿来主义泛滥，能用就是，反正老板也不关心是不是你自己写的，用我现在老大的话来说，阅读源码似乎只是一种“锦上添花”的事，有自然好，没有也罢。
@@ -147,10 +147,13 @@
         
             <li class="sidebar-button">
                 
-                    <a  class="sidebar-button-link " href="mailto:kidhaibara@gmail.com" target="_blank">
+                    <a  class="sidebar-button-link "
+                         href="/link"
+                        
+                    >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-at"></i>
-                    <span class="sidebar-button-desc">Mail</span>
+                    <span class="sidebar-button-desc">Links</span>
                 </a>
         </li>
         
@@ -203,7 +206,7 @@
 <p>又比如，如果哪里出现异常，你能快速定位到源码抛异常类的地方，就能快速解决BUG，对症下药，一招撂倒，有些时候，修复BUG的时间不是用在解决问题上，而是用在定位问题上。</p>
 <p>这里有必要提一下，当Logcat把异常的栈信息打印出来的时候，有些异常出现的原因并不真的是Logcat的信息里描述的原因，因为Logcat里的异常的信息也只是由系统源码打印出来的，而这些源码大多时候只是普通的Java代码，和你自己写的没什么区别，如果源码抛出异常的代码的逻辑不够严谨的话，那实际的异常和Logcat里描述的异常可能对不上。比如之前搞动态加载的时候，在使用LayoutInflator渲染一个外部的XML布局时，抛了一个“Class not found”的异常，我要渲染的类可是LinearLayout啊，怎么可能没有！定位到源码里才发现，这里只要是类渲染失败就会抛这个异常，再定位到具体抛异常的地方，发现实际是Dimens资源找不到，困扰半年的问题立刻解决。</p>
 <h3 id="u5176_u4E8C_uFF0C_u80FD_u591F_u7406_u89E3Android_u8BBE_u8BA1_u8005_u7684_u610F_u56FE_u3002"><a href="#u5176_u4E8C_uFF0C_u80FD_u591F_u7406_u89E3Android_u8BBE_u8BA1_u8005_u7684_u610F_u56FE_u3002" class="headerlink" title="其二，能够理解Android设计者的意图。"></a>其二，能够理解Android设计者的意图。</h3><p>这个描述可能不好，比如说，许多人都觉得Android开发其实就是Java开发，通过阅读Context类的设计，你能够理解Google是如何在Java的基础上加上Android的特性的，你能够理解Context被叫做“环境”的原因。此外，阅读Activity/Service的源码，你能理解到四大组件类明明就是普通的JAVA类，为什么他们就是组件而别的类就不是组件。阅读Handler/Message/Looper的源码，你还能理解到Handler的精髓，数据驱动比事件驱动更适合用于设计需要经常改动的框架。阅读源码，你能知道Android是怎么管理Window以及向控制View的触摸事件的，你能知道基本上所有的res资源都有等价的Java代码的实现方式，你还能知道Dalvik是怎么无缝向ART过度的，在看通的那一瞬间，保证你觉得“水可载舟，亦可赛艇”！</p>
-<h3 id="u5176_u4E09_uFF0C_u80FD_u591F_u5B66_u4E60_u4F18_u79C0_u5F00_u6E90_u9879_u76EE_u7684_u4EE3_u7801_u98CE_u683C_u548C_u8BBE_u8BA1_u7406_u5FF5"><a href="#u5176_u4E09_uFF0C_u80FD_u591F_u5B66_u4E60_u4F18_u79C0_u5F00_u6E90_u9879_u76EE_u7684_u4EE3_u7801_u98CE_u683C_u548C_u8BBE_u8BA1_u7406_u5FF5" class="headerlink" title="其三，能够学习优秀开源项目的代码风格和设计理念"></a>其三，能够学习优秀开源项目的代码风格和设计理念</h3><p>这也是最重要的，看多了源码之后，你会发现所谓的源码也不过是普通的的Java代码，在不知不觉中受到这些优秀设计思想的影响。相信许多人在看 <strong>Volley</strong> 源码此前，对异步任务控制的想法基本就是毫无想法，看完之后简直是醍醐灌顶，原来代码也能写得这么有魅力，再看看自己之前写的异步任务，“new Thread().start”…，简直是“too young, sometime navie”有没有。</p>
+<h3 id="u5176_u4E09_uFF0C_u80FD_u591F_u5B66_u4E60_u4F18_u79C0_u5F00_u6E90_u9879_u76EE_u7684_u4EE3_u7801_u98CE_u683C_u548C_u8BBE_u8BA1_u7406_u5FF5"><a href="#u5176_u4E09_uFF0C_u80FD_u591F_u5B66_u4E60_u4F18_u79C0_u5F00_u6E90_u9879_u76EE_u7684_u4EE3_u7801_u98CE_u683C_u548C_u8BBE_u8BA1_u7406_u5FF5" class="headerlink" title="其三，能够学习优秀开源项目的代码风格和设计理念"></a>其三，能够学习优秀开源项目的代码风格和设计理念</h3><p>这也是最重要的，看多了源码之后，你会发现所谓的源码也不过是普通的的Java代码，在不知不觉中受到这些优秀设计思想的影响。相信许多人在看 <strong>Volley</strong> 源码此前，对异步任务控制的想法基本就是毫无想法，看完之后简直是醍醐灌顶，原来代码也能写得这么有魅力，再看看自己之前写的异步任务，“new Thread().start”…，简直是“too young, sometime naive”有没有。</p>
 <p>看了越来越多Android的源码，自己的写应用的时候，也就能写出更加“Best Performance”的代码，见识了越来越多的开源项目，自己也能够更容易找到最符合自己应用的框架和技术方案，学习了越来越多的优秀的代码风格，自己也就更能写出漂亮以及容易扩展的代码。</p>
 <p>或许对许多做Android开发来说，平时的工作就是按照设计的图写个布局，再解析后台的数据，下班了把测试用的安卓机扔进抽屉拿出自己的苹果手机…… 但有时候花点时间看看源码，或许会觉得设计代码还是挺有意思的，特别是，当你花了两天的时间构思代码，再花两天的时间写代码，这时你可能觉得你还有许多代码要写，但是突然发现只要把你写好的接口衔接一下就都完成了，而且写了两天的代码居然一次编译通过！更甚，产品突然改了个需求，你在抱怨了一顿后发现只要花10分钟把原来的接口换个实现就搞定了，这或许是程序员工作中为数不多的乐趣吧。</p>
 
@@ -216,7 +219,7 @@
     <div class="post-footer main-content-wrap">
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">TAGGED IN</span><br/>
+                <span class="text-color-light text-small">Tagged in</span><br/>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/android/">android</a> <a class="tag tag--primary tag--small t-link" href="/tags/源码/">源码</a>
 
