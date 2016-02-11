@@ -14,12 +14,12 @@
     
         <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <meta name="description" content="前面吐槽了 有没有必要阅读Android源码，后面觉得只吐槽不太好，还是应该多少弄点干货。">
+    <meta name="description" content="前面吐槽了 有没有必要阅读Android源码，后面觉得只吐槽不太好，还是应该多少弄点干货。需要说明的是，Android每个系统版本的源码都会有变动，而且代码中时不时Java和Native互相穿插，追求完全看透源码意义不大，把目的定在“理解代码设计的思路，弄清各个生命周期方法调用的顺序”比较实际。">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="阅读Android源码的一些姿势">
 <meta property="og:url" content="http://kaedea.com/2016/02/09/android-about-source-code-how-to-read/index.html">
 <meta property="og:site_name" content="Kaede's Studio">
-<meta property="og:description" content="前面吐槽了 有没有必要阅读Android源码，后面觉得只吐槽不太好，还是应该多少弄点干货。">
+<meta property="og:description" content="前面吐槽了 有没有必要阅读Android源码，后面觉得只吐槽不太好，还是应该多少弄点干货。需要说明的是，Android每个系统版本的源码都会有变动，而且代码中时不时Java和Native互相穿插，追求完全看透源码意义不大，把目的定在“理解代码设计的思路，弄清各个生命周期方法调用的顺序”比较实际。">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/16-2-9/47582414.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/16-2-9/89744598.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/16-2-9/89825596.jpg">
@@ -27,10 +27,13 @@
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/16-2-9/70376864.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/16-2-9/73121661.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/16-2-9/2827740.jpg">
-<meta property="og:updated_time" content="2016-02-09T09:52:03.757Z">
+<meta property="og:updated_time" content="2016-02-11T08:59:24.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="阅读Android源码的一些姿势">
-<meta name="twitter:description" content="前面吐槽了 有没有必要阅读Android源码，后面觉得只吐槽不太好，还是应该多少弄点干货。">
+<meta name="twitter:description" content="前面吐槽了 有没有必要阅读Android源码，后面觉得只吐槽不太好，还是应该多少弄点干货。需要说明的是，Android每个系统版本的源码都会有变动，而且代码中时不时Java和Native互相穿插，追求完全看透源码意义不大，把目的定在“理解代码设计的思路，弄清各个生命周期方法调用的顺序”比较实际。">
+<meta name="twitter:creator" content="@kidhaibara">
+    
+        <meta rel="publisher" content="https://plus.google.com/113775988407213380000"/>
     
     
     
@@ -126,7 +129,7 @@
             <li class="sidebar-button">
                 
                     <a  class="sidebar-button-link "
-                         href="/about"
+                         href="/#about"
                         
                     >
                 
@@ -198,7 +201,7 @@
     <div class="post-content markdown" itemprop="articleBody">
         <div class="main-content-wrap">
             <p><img src="http://7xih5c.com1.z0.glb.clouddn.com/16-2-9/47582414.jpg" alt=""></p>
-<p>前面吐槽了 <a href="http://kaedea.com/2016/02/08/android-about-source-code/">有没有必要阅读Android源码</a>，后面觉得只吐槽不太好，还是应该多少弄点干货。<br><a id="more"></a></p>
+<p>前面吐槽了 <a href="http://kaedea.com/2016/02/08/android-about-source-code/">有没有必要阅读Android源码</a>，后面觉得只吐槽不太好，还是应该多少弄点干货。需要说明的是，Android每个系统版本的源码都会有变动，而且代码中时不时Java和Native互相穿插，追求完全看透源码意义不大，把目的定在“理解代码设计的思路，弄清各个生命周期方法调用的顺序”比较实际。<br><a id="more"></a></p>
 <h2 id="u65E5_u5E38_u5F00_u53D1_u4E2D_u600E_u4E48_u9605_u8BFB_u6E90_u7801"><a href="#u65E5_u5E38_u5F00_u53D1_u4E2D_u600E_u4E48_u9605_u8BFB_u6E90_u7801" class="headerlink" title="日常开发中怎么阅读源码"></a>日常开发中怎么阅读源码</h2><h3 id="u627E_u5230_u6B63_u786E_u7684_u6E90_u7801"><a href="#u627E_u5230_u6B63_u786E_u7684_u6E90_u7801" class="headerlink" title="找到正确的源码"></a>找到正确的源码</h3><p>IDE是日常经常用的东西，Eclipse就不说了，直接从Android Studio（基于IntelliJ Community版本改造）开始。</p>
 <p>我们平时的Android项目，都是要依赖Android SDK里对应API Level的android.jar包（而且是以Provided的形式依赖），这样才能使用Android提供的API。在IntelliJ中，当想要看具体类的源码的时候，如果Android SDK里对应API Level的Source包有下载的话，IDE会打开对应的Source包；如果还没有下载，IDE会把对应API Level的android.jar包反编译成Java代码，这个规则对于一些第三方的开源项目也一样。推荐下载Source源码，毕竟反编译的Java代码不可能完全和源码的时候一样，有时候反编译出来的代码的执行逻辑可能完全等价，但是可阅读性下降了不好，而且也少了一些重要的注释。</p>
 <p>定位具体源码的时候，可以通过“Ctrl+鼠标左键”来查看，也可以通过“双击Shift”，在查找框里输入目标类的名字来定位。</p>
@@ -453,14 +456,14 @@
         
             <h4 id="about-card-name">Kaede Akatsuki</h4>
         
-            <h5 id="about-card-bio"><p>話は安いものですので、コードを表させてください！</p>
+            <h5 id="about-card-bio"><p>我叫小风（Kaede）<br>爱好是程序设计、日本语、ACG<br>具体介绍可以参考 <a href="/about">About</a></p>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br/>
-                <p>Android Developer</p>
+                <p>Android 开发</p>
 
             </h5>
         
@@ -468,13 +471,13 @@
             <h5 id="about-card-location">
                 <i class="fa fa-map-marker"></i>
                 <br/>
-                Chiba Japan
+                妖都
             </h5>
         
     </div>
 </div>
 
-        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-12-26/63612911.jpg');"></div>
+        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/16-2-11/12439287.jpg');"></div>
     </body>
     <!--SCRIPTS-->
 <script src="/assets/js/script.min.js" type="text/javascript"></script>
