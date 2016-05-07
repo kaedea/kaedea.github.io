@@ -5,8 +5,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Kaede&#39;s Studio">
-    <title>Android动态加载技术 ClassLoader的工作机制 - Kaede&#39;s Studio</title>
+    <meta name="generator" content="MOE STUDIO">
+    <title>Android动态加载技术 ClassLoader的工作机制 - MOE STUDIO</title>
     <meta name="author" content="Kaede Akatsuki">
     
         <link rel="icon" href="/assets/images/favicon2.png">
@@ -18,7 +18,7 @@
 <meta property="og:type" content="blog">
 <meta property="og:title" content="Android动态加载技术 ClassLoader的工作机制">
 <meta property="og:url" content="http://kaedea.com/2016/02/07/android-dynamical-loading-02-classloader/index.html">
-<meta property="og:site_name" content="Kaede's Studio">
+<meta property="og:site_name" content="MOE STUDIO">
 <meta property="og:description" content="早期使用过Eclipse等Java编写的软件的同学可能比较熟悉，Eclipse可以加载许多第三方的插件（或者叫扩展），这就是动态加载。这些插件大多是一些Jar包，而使用插件其实就是动态加载Jar包里的Class进行工作。这其实非常好理解，Java代码都是写在Class里面的，程序运行在虚拟机上时，虚拟机需要把需要的Class加载进来才能创建实例对象并工作，而完成这一个加载工作的角色就是ClassL">
 <meta property="og:updated_time" content="2016-02-06T18:48:25.695Z">
 <meta name="twitter:card" content="summary">
@@ -46,7 +46,7 @@
             <header id="header" data-behavior="1">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
-        <a class="header-title-link" href="/ ">Kaede&#39;s Studio</a>
+        <a class="header-title-link" href="/ ">MOE STUDIO</a>
     </h1>
     
         
@@ -205,7 +205,7 @@
 <h2 id="u6709_u51E0_u4E2AClassLoader_u5B9E_u4F8B_uFF1F"><a href="#u6709_u51E0_u4E2AClassLoader_u5B9E_u4F8B_uFF1F" class="headerlink" title="有几个ClassLoader实例？"></a>有几个ClassLoader实例？</h2><p><strong>动态加载的基础是ClassLoader</strong>，从名字也可以看出，ClassLoader就是专门用来处理类加载工作的，所以这货也叫类加载器，而且一个运行中的APP <strong>不仅只有一个类加载器</strong>。</p>
 <p>其实，在Android系统启动的时候会创建一个Boot类型的ClassLoader实例，用于加载一些系统Framework层级需要的类，我们的Android应用里也需要用到一些系统的类，所以APP启动的时候也会把这个Boot类型的ClassLoader传进来。</p>
 <p>此外，APP也有自己的类，这些类保存在APK的dex文件里面，所以APP启动的时候，也会创建一个自己的ClassLoader实例，用于加载自己dex文件中的类。下面我们在项目里验证看看<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">   <span class="annotation">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">	ClassLoader classLoader = getClassLoader();</span><br><span class="line">	<span class="keyword">if</span> (classLoader != <span class="keyword">null</span>)&#123;</span><br><span class="line">		Log.i(TAG, <span class="string">"[onCreate] classLoader "</span> + i + <span class="string">" : "</span> + classLoader.toString());</span><br><span class="line">		<span class="keyword">while</span> (classLoader.getParent()!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			classLoader = classLoader.getParent();</span><br><span class="line">			Log.i(TAG,<span class="string">"[onCreate] classLoader "</span> + i + <span class="string">" : "</span> + classLoader.toString());</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出结果为<br><figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="atom">onCreate</span>] <span class="atom">classLoader</span> <span class="number">1</span> : <span class="atom">dalvik</span>.<span class="atom">system</span>.<span class="name">PathClassLoader</span>[<span class="name">DexPathList</span>[[<span class="atom">zip</span> <span class="atom">file</span> <span class="string">"/data/app/me.kaede.anroidclassloadersample-1/base.apk"</span>],<span class="atom">nativeLibraryDirectories</span>=[/<span class="atom">vendor</span>/<span class="atom">lib</span>, /<span class="atom">system</span>/<span class="atom">lib</span>]]]</span><br><span class="line"></span><br><span class="line">[<span class="atom">onCreate</span>] <span class="atom">classLoader</span> <span class="number">2</span> : <span class="atom">java</span>.<span class="atom">lang</span>.<span class="name">BootClassLoader</span>@<span class="number">14</span><span class="atom">af4e32</span></span><br></pre></td></tr></table></figure></p>
+<p>输出结果为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[onCreate] classLoader 1 : dalvik.system.PathClassLoader[DexPathList[[zip file &#34;/data/app/me.kaede.anroidclassloadersample-1/base.apk&#34;],nativeLibraryDirectories=[/vendor/lib, /system/lib]]]&#10;&#10;[onCreate] classLoader 2 : java.lang.BootClassLoader@14af4e32</span><br></pre></td></tr></table></figure></p>
 <p>可以看见有2个Classloader实例，一个是BootClassLoader（系统启动的时候创建的），另一个是PathClassLoader（应用启动时创建的，用于加载“/data/app/me.kaede.anroidclassloadersample-1/base.apk”里面的类）。由此也可以看出，<strong>一个运行的Android应用至少有2个ClassLoader</strong>。</p>
 <h2 id="u521B_u5EFA_u81EA_u5DF1ClassLoader_u5B9E_u4F8B"><a href="#u521B_u5EFA_u81EA_u5DF1ClassLoader_u5B9E_u4F8B" class="headerlink" title="创建自己ClassLoader实例"></a>创建自己ClassLoader实例</h2><p>动态加载外部的dex文件的时候，我们也可以使用自己创建的ClassLoader实例来加载dex里面的Class，不过ClassLoader的创建方式有点特殊，我们先看看它的构造方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * constructor for the BootClassLoader which needs parent to be null.</span><br><span class="line"> */</span></span><br><span class="line">ClassLoader(ClassLoader parentLoader, <span class="keyword">boolean</span> nullAllowed) &#123;</span><br><span class="line">    <span class="keyword">if</span> (parentLoader == <span class="keyword">null</span> &amp;&amp; !nullAllowed) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"parentLoader == null &amp;&amp; !nullAllowed"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    parent = parentLoader;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>创建一个ClassLoader实例的时候，需要使用一个现有的ClassLoader实例作为新创建的实例的Parent。这样一来，一个Android应用，甚至整个Android系统里所有的ClassLoader实例都会被一棵树关联起来，这也是ClassLoader的 <strong>双亲代理模型</strong>（Parent-Delegation Model）的特点。</p>
