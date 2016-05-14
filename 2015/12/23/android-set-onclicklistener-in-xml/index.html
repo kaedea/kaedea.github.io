@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="MOE STUDIO - 萌の軌跡・願いの叶う場所">
-    <title>在XML布局里给View设置点击事件 - MOE STUDIO - 萌の軌跡・願いの叶う場所</title>
+    <title>在XML布局里给VIEW设置点击事件 - MOE STUDIO - 萌の軌跡・願いの叶う場所</title>
     <meta name="author" content="Kaede Akatsuki">
     
         <link rel="icon" href="/assets/images/favicon2.png">
@@ -16,15 +16,15 @@
     
     <meta name="description" content="Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过android:onClick属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="在XML布局里给View设置点击事件">
+<meta property="og:title" content="在XML布局里给VIEW设置点击事件">
 <meta property="og:url" content="http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/index.html">
 <meta property="og:site_name" content="MOE STUDIO - 萌の軌跡・願いの叶う場所">
 <meta property="og:description" content="Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过android:onClick属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-12-22/30732155.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-12-22/51841820.jpg">
-<meta property="og:updated_time" content="2016-02-05T13:30:31.378Z">
+<meta property="og:updated_time" content="2016-05-14T07:57:17.292Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在XML布局里给View设置点击事件">
+<meta name="twitter:title" content="在XML布局里给VIEW设置点击事件">
 <meta name="twitter:description" content="Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过android:onClick属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。">
 <meta name="twitter:creator" content="@kidhaibara">
     
@@ -177,7 +177,7 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title" itemprop="headline">
-            在XML布局里给View设置点击事件
+            在XML布局里给VIEW设置点击事件
         </h1>
     
     <div class="post-meta">
@@ -205,7 +205,7 @@
 <p>有的时候从XML布局里直接设定点击事件会比较方便（特别是在写DEMO项目的时候），这种做法平时用的人并不多，从使用方式上大致能猜出来，View应该是在运行的时候，使用反射的方式从Activity找到“onClickView”方法并调用，因为这种做法并没有用到任何接口。</p>
 <p>接下来，我们可以从源码中分析出View是怎么触发回调方法的。</p>
 <p><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-12-22/30732155.jpg" alt=""><br>View有5个构造方法，第一个是内部使用的，平时在Java代码中直接创建View实例用的是第二种方法，而从XML布局渲染出来的View实例最后都是要调用第五种方法。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">View</span><span class="params">(Context context, @Nullable AttributeSet attrs, <span class="keyword">int</span> defStyleAttr, <span class="keyword">int</span> defStyleRes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> TypedArray a = context.obtainStyledAttributes(</span><br><span class="line">                attrs, com.android.internal.R.styleable.View, defStyleAttr, defStyleRes);</span><br><span class="line">                </span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> attr = a.getIndex(i);</span><br><span class="line">            <span class="keyword">switch</span> (attr) &#123;</span><br><span class="line">                ……</span><br><span class="line">                <span class="comment">// 处理onClick属性</span></span><br><span class="line">                <span class="keyword">case</span> R.styleable.View_onClick:</span><br><span class="line">                    <span class="keyword">if</span> (context.isRestricted()) &#123;</span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"The android:onClick attribute cannot "</span></span><br><span class="line">                                + <span class="string">"be used within a restricted context"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">final</span> String handlerName = a.getString(attr);</span><br><span class="line">                    <span class="keyword">if</span> (handlerName != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="comment">// 给当前View实例设置一个DeclaredOnClickListener监听器</span></span><br><span class="line">                        setOnClickListener(<span class="keyword">new</span> DeclaredOnClickListener(<span class="keyword">this</span>, handlerName));</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">View</span><span class="params">(Context context, @Nullable AttributeSet attrs, <span class="keyword">int</span> defStyleAttr, <span class="keyword">int</span> defStyleRes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">final</span> TypedArray a = context.obtainStyledAttributes(</span><br><span class="line">                attrs, com.android.internal.R.styleable.View, defStyleAttr, defStyleRes);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> attr = a.getIndex(i);</span><br><span class="line">            <span class="keyword">switch</span> (attr) &#123;</span><br><span class="line">                ……</span><br><span class="line">                <span class="comment">// 处理onClick属性</span></span><br><span class="line">                <span class="keyword">case</span> R.styleable.View_onClick:</span><br><span class="line">                    <span class="keyword">if</span> (context.isRestricted()) &#123;</span><br><span class="line">                        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"The android:onClick attribute cannot "</span></span><br><span class="line">                                + <span class="string">"be used within a restricted context"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">final</span> String handlerName = a.getString(attr);</span><br><span class="line">                    <span class="keyword">if</span> (handlerName != <span class="keyword">null</span>) &#123;</span><br><span class="line">                        <span class="comment">// 给当前View实例设置一个DeclaredOnClickListener监听器</span></span><br><span class="line">                        setOnClickListener(<span class="keyword">new</span> DeclaredOnClickListener(<span class="keyword">this</span>, handlerName));</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>处理onClick属性的时候，先判断View的Context是否isRestricted，如果是就抛出一个IllegalStateException异常。看看isRestricted方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> * Indicates whether this Context is restricted.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> true&#125; if this Context is restricted, &#123;<span class="doctag">@code</span> false&#125; otherwise.</span><br><span class="line"> *</span><br><span class="line"> * <span class="doctag">@see</span> #CONTEXT_RESTRICTED</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRestricted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>isRestricted是用于判断当前的Context实例是否出于被限制的状态，按照官方的解释，处限制状态的Context，会忽略某些特点的功能，比如XML的某些属性，很明显，我们在研究的<code>android:onClick</code>属性也会被忽略。</p>
 <blockquote>
@@ -239,7 +239,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/02/05/android-dynamical-loading-00-index/"  data-tooltip="Android动态加载技术 系列索引">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/02/05/android-dynamical-loading-00-index/"  data-tooltip="ANDROID动态加载 系列索引">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -274,7 +274,7 @@
         </li>
 
          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/&amp;title=在XML布局里给View设置点击事件">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/&amp;title=在XML布局里给VIEW设置点击事件">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
@@ -321,7 +321,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/02/05/android-dynamical-loading-00-index/"  data-tooltip="Android动态加载技术 系列索引">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/02/05/android-dynamical-loading-00-index/"  data-tooltip="ANDROID动态加载 系列索引">
                 
                     <i class="fa fa-angle-left"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -356,7 +356,7 @@
         </li>
 
          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/&amp;title=在XML布局里给View设置点击事件">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/&amp;title=在XML布局里给VIEW设置点击事件">
                 <i class="fa fa-weibo"></i>
             </a>
         </li>
