@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="MOE STUDIO - 萌の軌跡・願いの叶う場所">
+    <title>加载SD卡中的SO库 - MOE STUDIO - 萌の軌跡・願いの叶う場所</title>
+    <meta name="author" content="Kaede Akatsuki">
+    
+        <link rel="icon" href="/assets/images/favicon2.png">
+    
+    
+        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <meta name="description" content="Android中JNI的使用其实就包含了动态加载，APP运行时动态加载.so库并通过JNI调用其封装好的方法。后者一般是使用NDK工具从C/C++代码编译而成，运行在Native层，效率会比执行在虚拟机的Java代码高很多，所以Android中经常通过动态加载.so库来完成一些对性能比较有需求的工作（比如T9搜索、或者Bitmap的解码、图片高斯模糊处理等）。此外，由于.so库是由C++编译而来的">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="加载SD卡中的SO库">
+<meta property="og:url" content="http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/index.html">
+<meta property="og:site_name" content="MOE STUDIO - 萌の軌跡・願いの叶う場所">
+<meta property="og:description" content="Android中JNI的使用其实就包含了动态加载，APP运行时动态加载.so库并通过JNI调用其封装好的方法。后者一般是使用NDK工具从C/C++代码编译而成，运行在Native层，效率会比执行在虚拟机的Java代码高很多，所以Android中经常通过动态加载.so库来完成一些对性能比较有需求的工作（比如T9搜索、或者Bitmap的解码、图片高斯模糊处理等）。此外，由于.so库是由C++编译而来的">
+<meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-11-26/19622075.jpg">
+<meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-11-26/58498917.jpg">
+<meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-11-26/49457004.jpg">
+<meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-11-26/91753544.jpg">
+<meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-11-27/73725063.jpg">
+<meta property="og:updated_time" content="2016-06-04T15:43:30.493Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="加载SD卡中的SO库">
+<meta name="twitter:description" content="Android中JNI的使用其实就包含了动态加载，APP运行时动态加载.so库并通过JNI调用其封装好的方法。后者一般是使用NDK工具从C/C++代码编译而成，运行在Native层，效率会比执行在虚拟机的Java代码高很多，所以Android中经常通过动态加载.so库来完成一些对性能比较有需求的工作（比如T9搜索、或者Bitmap的解码、图片高斯模糊处理等）。此外，由于.so库是由C++编译而来的">
+<meta name="twitter:creator" content="@kidhaibara">
+    
+        <meta rel="publisher" content="https://plus.google.com/113775988407213380000"/>
+    
+    
+    
+        <meta property="og:image" content="/assets/images/avatar_01.png"/>
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    <!--STYLES END-->
+    
+</head>
+
+    <body>
+        <div id="blog">
+            <header id="header" data-behavior="1">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <h1 class="header-title">
+        <a class="header-title-link" href="/ ">MOE STUDIO - 萌の軌跡・願いの叶う場所</a>
+    </h1>
+    
+        
+            <a  class="header-right-icon st-search-show-outputs"
+                href="/#search">
+        
+                <i class="fa fa-lg fa-search"></i>
+            </a>
+    
+</header>
+            <nav id="sidebar" data-behavior="1">
+    
+        <div class="sidebar-profile">
+            <a href="/#about">
+                
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar_01.png"/>
+                
+            </a>
+            <span class="sidebar-profile-name">Kaede Akatsuki</span>
+        </div>
+    
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/ "
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-circle-thin"></i>
+                    <span class="sidebar-button-desc">Home</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-categories"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-star-o"></i>
+                    <span class="sidebar-button-desc">Categories</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/all-archives"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
+                    <span class="sidebar-button-desc">Archive</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link st-search-show-outputs"
+                         href="/#search"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-search"></i>
+                    <span class="sidebar-button-desc">Search</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/#about"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-terminal"></i>
+                    <span class="sidebar-button-desc">Me</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+        <ul class="sidebar-buttons">
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link " href="https://github.com/kaedea" target="_blank">
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+                    <span class="sidebar-button-desc">GitHub</span>
+                </a>
+        </li>
+        
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/link"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-at"></i>
+                    <span class="sidebar-button-desc">Links</span>
+                </a>
+        </li>
+        
+    </ul>
+    
+</nav>
+
+            
+            <div id="main" data-behavior="1"
+                 class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post" itemscope itemType="http://schema.org/BlogPosting">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title" itemprop="headline">
+            加载SD卡中的SO库
+        </h1>
+    
+    <div class="post-meta">
+    <time itemprop="datePublished" content="Wed Jun 01 2016 00:00:00 GMT+0800">
+	
+		    Jun 01, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Android/">Android</a>, <a class="category-link" href="/categories/Android/动态加载/">动态加载</a>
+
+
+    
+</div>
+</div>
+    
+    <div class="post-content markdown" itemprop="articleBody">
+        <div class="main-content-wrap">
+            <p>Android中JNI的使用其实就包含了动态加载，APP运行时动态加载<code>.so</code>库并通过JNI调用其封装好的方法。后者一般是使用NDK工具从C/C++代码编译而成，运行在Native层，效率会比执行在虚拟机的Java代码高很多，所以Android中经常通过动态加载<code>.so</code>库来完成一些对性能比较有需求的工作（比如T9搜索、或者Bitmap的解码、图片高斯模糊处理等）。此外，由于<code>.so</code>库是由C++编译而来的，只能被反编译成汇编代码，相比Smali更难被破解，因此<code>.so</code>库也可以被用于安全领域。</p>
+<p>与我们常说的基于ClassLoader的动态加载不同，SO库的加载是使用System类的（由此可见对SO库的支持也是Android的基础功能），所以这里这是作为动态加载系列的补充说明。不过，如果使用ClassLoader加载SD卡里插件APK，而插件APK里面包含有SO库，这就涉及到了对插件APK里的SO库的加载，所以我们也要知道如何加载SD卡里面的SO库。<br><a id="more"></a></p>
+<h2 id="u4E00_u822C_u7684SO_u6587_u4EF6_u7684_u4F7F_u7528_u59FF_u52BF"><a href="#u4E00_u822C_u7684SO_u6587_u4EF6_u7684_u4F7F_u7528_u59FF_u52BF" class="headerlink" title="一般的SO文件的使用姿势"></a>一般的SO文件的使用姿势</h2><p>以一个“图片高斯模糊”的功能为例，如果使用Java代码对图像Bitmap的每一个像素点进行计算，那整体耗时将会非常大，所以可以考虑使用JNI。（详细的JNI使用教程网络上有许多，这里不赘述）</p>
+<p>这里推荐一个开源的高斯模糊项目 <a href="https://github.com/kikoso/android-stackblur" target="_blank" rel="external">Android StackBlur</a></p>
+<p>在命令行定位到Android.mk文件所在目录，运行NDK工具的<code>ndk-build</code>命令就能编译出我们需要SO库<br><br><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-11-26/19622075.jpg" alt=""></p>
+<p>再把SO库复制到Android Studio项目的<code>jniLibs</code>目录中<br><br><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-11-26/58498917.jpg" alt=""> <br><br>（Android Studio现在也支持直接编译SO库，但是有许多坑，这里我选择手动编译）</p>
+<p>接着在Java中把SO库对应的模块加载进来<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// load so file from internal directory</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			System.loadLibrary(<span class="string">"stackblur"</span>);</span><br><span class="line">			NativeBlurProcess.isLoadLibraryOk.set(<span class="keyword">true</span>);</span><br><span class="line">			Log.i(<span class="string">"MainActivity"</span>, <span class="string">"loadLibrary success!"</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Throwable throwable) &#123;</span><br><span class="line">			Log.i(<span class="string">"MainActivity"</span>, <span class="string">"loadLibrary error!"</span> + throwable);</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure></p>
+<p>加载成功后就可以直接使用Native方法了<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NativeBlurProcess</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> AtomicBoolean isLoadLibraryOk = <span class="keyword">new</span> AtomicBoolean(<span class="keyword">false</span>);</span><br><span class="line">    <span class="comment">//native method</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title">functionToBlur</span><span class="params">(Bitmap bitmapOut, <span class="keyword">int</span> radius, <span class="keyword">int</span> threadCount, <span class="keyword">int</span> threadIndex, <span class="keyword">int</span> round)</span></span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由此可见，在Android项目中，SO库的使用也是一种动态加载，在运行时把可执行文件加载进来。一般情况下，SO库都是打包在APK内部的，不允许修改这种“动态加载”看起来不是我们熟悉的那种啊，貌似没什么卵用。不过，其实SO库也是可以存放在外部存储路径的。</p>
+<h2 id="u5982_u4F55_u628ASO_u6587_u4EF6_u5B58_u653E_u5728_u5916_u90E8_u5B58_u50A8"><a href="#u5982_u4F55_u628ASO_u6587_u4EF6_u5B58_u653E_u5728_u5916_u90E8_u5B58_u50A8" class="headerlink" title="如何把SO文件存放在外部存储"></a>如何把SO文件存放在外部存储</h2><p>注意到上面加载SO库的时候我们用到了System类的“loadLibrary”方法，同时我们也发现System类还有一个“load”方法，看起来差不多啊，看看他们有什么区别吧！<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">     * See &#123;<span class="doctag">@link</span> Runtime#load&#125;.</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">load</span><span class="params">(String pathName)</span> </span>&#123;</span><br><span class="line">        Runtime.getRuntime().load(pathName, VMStack.getCallingClassLoader());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     * See &#123;<span class="doctag">@link</span> Runtime#loadLibrary&#125;.</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loadLibrary</span><span class="params">(String libName)</span> </span>&#123;</span><br><span class="line">        Runtime.getRuntime().loadLibrary(libName, VMStack.getCallingClassLoader());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>先看看loadLibrary，这里调用了Runtime的loadLibrary，进去一看，又是动态加载熟悉的ClassLoader了（这里也佐证了SO库的使用就是一种动态加载的说法）<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * Searches for and loads the given shared library using the given ClassLoader.</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loadLibrary</span><span class="params">(String libraryName, ClassLoader loader)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (loader != <span class="keyword">null</span>) &#123;</span><br><span class="line">        String filename = loader.findLibrary(libraryName);</span><br><span class="line">        String error = doLoad(filename, loader);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看样子就像是通过库名获取一个文件路径，再调用“doLoad”方法加载这个文件，先看看“loader.findLibrary(libraryName)”<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> String <span class="title">findLibrary</span><span class="params">(String libName)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ClassLoader只是一个抽象类，它的大部分工作都在BaseDexClassLoader类中实现，进去看看<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseDexClassLoader</span> <span class="keyword">extends</span> <span class="title">ClassLoader</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findLibrary</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Stub!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>不对啊，这里只是抛了一个RuntimeException异常，什么都没做啊！</p>
+<p><strong>其实这里有一个误区</strong>，也是刚开始开Android SDK源码的同学容易搞混的。Android SDK自带的源码其实只是给我们开发者参考的，基本只是一些常用的类，Google不会把整个Android系统的源码都放到这里来，因为整个项目非常大，ClassLoader类平时我们接触得少，所以它的具体实现的源码并没有打包进SDK里，如果需要，我们要到官方AOSP项目里面去看（顺便一提，整个AOSP5.1项目大小超过150GB，真的有需要的话推荐用一个移动硬盘存储）。</p>
+<p>这里为了方便，我们可以直接看在线的代码 <a href="https://android.googlesource.com/platform/libcore-snapshot/+/ics-mr1/dalvik/src/main/java/dalvik/system/BaseDexClassLoader.java" target="_blank" rel="external">BaseDexClassLoader.java</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findLibrary</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pathList.findLibrary(name);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>再看进去DexPathList类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line">     * Finds the named native code library on any of the library</span><br><span class="line">     * directories pointed at by this instance. This will find the</span><br><span class="line">     * one in the earliest listed directory, ignoring any that are not</span><br><span class="line">     * readable regular files.</span><br><span class="line">     *</span><br><span class="line">     * <span class="doctag">@return</span> the complete path to the library or &#123;<span class="doctag">@code</span> null&#125; if no</span><br><span class="line">     * library was found</span><br><span class="line">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">findLibrary</span><span class="params">(String libraryName)</span> </span>&#123;</span><br><span class="line">        String fileName = System.mapLibraryName(libraryName);</span><br><span class="line">        <span class="keyword">for</span> (File directory : nativeLibraryDirectories) &#123;</span><br><span class="line">            File file = <span class="keyword">new</span> File(directory, fileName);</span><br><span class="line">            <span class="keyword">if</span> (file.exists() &amp;&amp; file.isFile() &amp;&amp; file.canRead()) &#123;</span><br><span class="line">                <span class="keyword">return</span> file.getPath();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>到这里已经明朗了，根据传进来的libName，扫描APK内部的nativeLibrary目录，获取并返回内部SO库文件的完整路径filename。再回到Runtime类，获取filename后调用了“doLoad”方法，看看<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> String <span class="title">doLoad</span><span class="params">(String name, ClassLoader loader)</span> </span>&#123;</span><br><span class="line">        String ldLibraryPath = <span class="keyword">null</span>;</span><br><span class="line">        String dexPath = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (loader == <span class="keyword">null</span>) &#123;</span><br><span class="line">            ldLibraryPath = System.getProperty(<span class="string">"java.library.path"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (loader <span class="keyword">instanceof</span> BaseDexClassLoader) &#123;</span><br><span class="line">            BaseDexClassLoader dexClassLoader = (BaseDexClassLoader) loader;</span><br><span class="line">            ldLibraryPath = dexClassLoader.getLdLibraryPath();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> nativeLoad(name, loader, ldLibraryPath);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>到这里就彻底清楚了，调用Native方法“nativeLoad”，通过完整的SO库路径filename，把目标SO库加载进来。</p>
+<p>说了半天还没有进入正题呢，不过我们可以想到，如果使用loadLibrary方法，到最后还是要找到目标SO库的完整路径，再把SO库加载进来，那我们能不能一开始就给出SO库的完整路径，然后直接加载进来？我们猜想load方法就是干这个的，看看。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">load</span><span class="params">(String absolutePath, ClassLoader loader)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (absolutePath == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"absolutePath == null"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        String error = doLoad(absolutePath, loader);</span><br><span class="line">        <span class="keyword">if</span> (error != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> UnsatisfiedLinkError(error);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我勒个去，一上来就直接来到doLoad方法了，这证明我们的猜想可能是正确的，那么在实际项目中测试看看吧！</p>
+<p>我们先把SO放在Asset里，然后再复制到内部存储，再使用load方法把其加载进来。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">	<span class="annotation">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">		setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">		File dir = <span class="keyword">this</span>.getDir(<span class="string">"jniLibs"</span>, Activity.MODE_PRIVATE);</span><br><span class="line">		File distFile = <span class="keyword">new</span> File(dir.getAbsolutePath() + File.separator + <span class="string">"libstackblur.so"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (copyFileFromAssets(<span class="keyword">this</span>, <span class="string">"libstackblur.so"</span>, distFile.getAbsolutePath()))&#123;</span><br><span class="line">		    <span class="comment">//使用load方法加载内部储存的SO库</span></span><br><span class="line">			System.load(distFile.getAbsolutePath());</span><br><span class="line">			NativeBlurProcess.isLoadLibraryOk.set(<span class="keyword">true</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDoBlur</span><span class="params">(View view)</span></span>&#123;</span><br><span class="line">		ImageView imageView = (ImageView) findViewById(R.id.iv_app);</span><br><span class="line">		Bitmap bitmap = BitmapFactory.decodeResource(getResources(), android.R.drawable.sym_def_app_icon);</span><br><span class="line">		Bitmap blur = NativeBlurProcess.blur(bitmap,<span class="number">20</span>,<span class="keyword">false</span>);</span><br><span class="line">		imageView.setImageBitmap(blur);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">copyFileFromAssets</span><span class="params">(Context context, String fileName, String path)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">boolean</span> copyIsFinish = <span class="keyword">false</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			InputStream is = context.getAssets().open(fileName);</span><br><span class="line">			File file = <span class="keyword">new</span> File(path);</span><br><span class="line">			file.createNewFile();</span><br><span class="line">			FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(file);</span><br><span class="line">			<span class="keyword">byte</span>[] temp = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">			<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span> ((i = is.read(temp)) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">				fos.write(temp, <span class="number">0</span>, i);</span><br><span class="line">			&#125;</span><br><span class="line">			fos.close();</span><br><span class="line">			is.close();</span><br><span class="line">			copyIsFinish = <span class="keyword">true</span>;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">			Log.e(<span class="string">"MainActivity"</span>, <span class="string">"[copyFileFromAssets] IOException "</span>+e.toString());</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> copyIsFinish;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>点击onDoBlur按钮，果然加载成功了！<br><br><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-11-26/49457004.jpg" alt=""></p>
+<p>那能不能直接加载外部存储上面的SO库呢，把SO库拷贝到SD卡上面试试。<br><br><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-11-26/91753544.jpg" alt=""></p>
+<p>看起来是不可以的样子，Permission denied！</p>
+<blockquote>
+<p>java.lang.UnsatisfiedLinkError: dlopen failed: couldn’t map “/storage/emulated/0/libstackblur.so” segment 1: Permission denied</p>
+</blockquote>
+<p>看起来像是没有权限的样子，看看源码哪里抛出的异常吧<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * Loads the given shared library using the given ClassLoader.</span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">load</span><span class="params">(String absolutePath, ClassLoader loader)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (absolutePath == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException(<span class="string">"absolutePath == null"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    String error = doLoad(absolutePath, loader);</span><br><span class="line">    <span class="keyword">if</span> (error != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// 这里抛出的异常</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> UnsatisfiedLinkError(error);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>应该是执行doLoad方法时出现了错误，但是上面也看过了，doLoad方法里调用了Native方法“nativeLoad”，那应该就是Native代码里出现的错误。平时我很少看到Native里面，上一次看的时候，是因为需要看看点九图NinePathDrawable的缩放控制信息chunk数组的具体作用是怎么样，费了好久才找到我想要的一小段代码。所以这里就暂时不跟进去了，有兴趣的同学可以告诉我关键代码的位置。</p>
+<p>我在一个Google的开发者论坛上找到了一些答案</p>
+<blockquote>
+<p>The SD Card is mounted noexec, so I’m not sure this will work.<br>Moreover, using the SD Card as a storage location is a really bad idea, since any other application can modify/delete/corrupt it easily.<br>Try downloading the library to your application’s data directory instead, and load it from here.</p>
+</blockquote>
+<p>这也容易理解，SD卡等外部存储路径是一种可拆卸的（mounted）不可执行（noexec）的储存媒介，不能直接用来作为可执行文件的运行目录，使用前应该把可执行文件复制到APP内部存储再运行。</p>
+<p>最后，我们也可以看看官方的API文档<br><img src="http://7xih5c.com1.z0.glb.clouddn.com/15-11-27/73725063.jpg" alt=""></p>
+<p>看来load方法的用途和我们理解的一致，文档里说的shared library就是指SO库（shared object），至此，我们就可以把SO文件移动到外部存储了，或者从网络下载都行。</p>
+
+            
+                
+
+            
+        </div>
+    </div>
+    <div class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">Tagged in</span><br/>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Android/">Android</a> <a class="tag tag--primary tag--small t-link" href="/tags/SO库/">SO库</a> <a class="tag tag--primary tag--small t-link" href="/tags/动态加载/">动态加载</a> <a class="tag tag--primary tag--small t-link" href="/tags/插件化/">插件化</a>
+
+            </div>
+        
+        <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/04/android-dynamical-loading-04-so-problems/"  data-tooltip="使用SO库时要注意的一些问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/15/whisper-get-filco-87/" data-tooltip="记·海淘FILCO忍者87青轴键盘">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/&amp;title=加载SD卡中的SO库">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+            <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2016 Kaede Akatsuki. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/06/04/android-dynamical-loading-04-so-problems/"  data-tooltip="使用SO库时要注意的一些问题">
+                
+                    <i class="fa fa-angle-left"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2016/05/15/whisper-get-filco-87/" data-tooltip="记·海淘FILCO忍者87青轴键盘">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions"  href="#btn-open-shareoptions">
+                <i class="fa fa-share-alt"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/">
+                <i class="fa fa-google-plus"></i>
+            </a>
+        </li>
+       
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/">
+                <i class="fa fa-twitter"></i>
+            </a>
+        </li>
+
+         <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/&amp;title=加载SD卡中的SO库">
+                <i class="fa fa-weibo"></i>
+            </a>
+        </li>
+
+        
+            <li class="post-action">
+                <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                    <i class="fa fa-comment-o"></i>
+                </a>
+            </li>
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#">
+            
+                <i class="fa fa-list"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+    <ul class="share-options">
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/">
+                <i class="fa fa-google-plus"></i><span class="">Share on Google Plus</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/">
+                <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+            </a>
+        </li>
+        <li class="share-option">
+            <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/06/01/android-dynamical-loading-03-so-in-sdcard/">
+                <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+            
+        </div>
+        <div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-remove"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/avatar_01.png"/>
+        
+            <h4 id="about-card-name">Kaede Akatsuki</h4>
+        
+            <h5 id="about-card-bio"><p>我叫小风（Kaede）<br>爱好是程序设计、日本语、ACG<br>具体介绍可以参考 <a href="/about">About</a></p>
+</h5>
+        
+        
+            <h5 id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br/>
+                <p>Android 开发</p>
+
+            </h5>
+        
+        
+            <h5 id="about-card-location">
+                <i class="fa fa-map-marker"></i>
+                <br/>
+                妖都
+            </h5>
+        
+    </div>
+</div>
+
+        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/29875909.jpg');"></div>
+    </body>
+    <!--SCRIPTS-->
+<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<!--SCRIPTS END-->
+
+    <script type="text/javascript">
+        var disqus_shortname = 'kidhaibara';
+        (function() {
+            var dsq = document.createElement('script');
+            dsq.type = 'text/javascript';
+            dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+
+
+    <script type="text/javascript">
+        (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+                (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+            e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+        })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+        _st('install','oCoTxxFvwzZyiv48ioJ5','2.0.0');
+    </script>
+
+
+</html>
