@@ -155,6 +155,18 @@
                 </a>
         </li>
         
+            <li class="sidebar-button">
+                
+                    <a  class="sidebar-button-link "
+                         href="/atom.xml"
+                        
+                    >
+                
+                    <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+                    <span class="sidebar-button-desc">RSS</span>
+                </a>
+        </li>
+        
     </ul>
     
 </nav>
@@ -203,6 +215,50 @@
                     
                         
                             <a href="/2016/06/04/android-dynamical-loading-04-so-problems/" class="postShorten-excerpt_link link ">Continue reading</a>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+            
+        </article>
+    
+        
+        
+                <article class="postShorten" itemscope itemType="http://schema.org/BlogPosting">
+        
+            <div class="postShorten-wrap">
+                <div class="postShorten-header">
+                    <h1 class="postShorten-title" itemprop="headline">
+                        
+                                <a class="link-unstyled" href="/2016/06/04/android-dynamical-loading-05-so-simple-mode/">简单的动态加载模式</a>
+                        
+                    </h1>
+                    <div class="postShorten-meta">
+    <time itemprop="datePublished" content="Sat Jun 04 2016 00:00:00 GMT+0800">
+	
+		    Jun 04, 2016
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/Android/">Android</a>, <a class="category-link" href="/categories/Android/动态加载/">动态加载</a>
+
+
+    
+</div>
+                </div>
+                <div class="postShorten-excerpt" itemprop="articleBody">
+                    
+                        <p>从这个章节开始，加载SO库的问题算是告一段落，现在开始谈及的动态加载，主要是指基于ClassLoader的加载方式，这也是这个动态加载系列文章的核心。</p>
+<p>Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 <strong>.jar</strong> 文件里面的类的。Android也类似，不过Android用的是Dalvik/ART虚拟机，不是JVM，也不能直接加载 <strong>.jar</strong> 文件，而是加载 <strong>.dex</strong> 文件。通过Android SDK提供的 <strong>DX工具</strong> 把 <strong>.jar</strong> 文件优化成 <strong>.dex</strong> 文件，然后Android的虚拟机才能加载。注意，有的Android应用能直接加载 <strong>.jar</strong> 文件，那是因为这个 <strong>.jar</strong> 文件已经经过优化，只不过后缀名没改（其实已经是 <strong>.dex</strong> 文件）。</p>
+<p>如果对ClassLoader的工作机制有兴趣，具体过程请参考 <a href="https://zhuanlan.zhihu.com/p/20524252">动态加载基础 ClassLoader的工作机制</a>，这里不再赘述。<br>
+                    
+                    
+                        
+                            <a href="/2016/06/04/android-dynamical-loading-05-so-simple-mode/" class="postShorten-excerpt_link link ">Continue reading</a>
                             
                         
                     
