@@ -9,10 +9,11 @@
     <title>有没有必要阅读ANDROID源码 - MOE STUDIO - 萌の軌跡・願いの叶う場所</title>
     <meta name="author" content="Kaede Akatsuki">
     
-        <link rel="icon" href="/assets/images/favicon2.png">
+    
+        <link rel="icon" href="http://kaedea.com/assets/images/favicon2.png">
     
     
-        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
     <meta name="description" content="或许对于许多Android开发者来说，所谓的Android工程师的工作“不过就是用XML实现设计师的美术图，用JSON解析服务器的数据，再把数据显示到界面上”就好了，源码什么的，看也好不看也罢，反正应用层的开发用不上，再加上现在优秀的轮子越来越多，拿来主义泛滥，能用就是，反正老板也不关心是不是你自己写的，用我现在老大的话来说，阅读源码似乎只是一种“锦上添花”的事，有自然好，没有也罢。
 那么，作为A">
@@ -23,7 +24,7 @@
 <meta property="og:description" content="或许对于许多Android开发者来说，所谓的Android工程师的工作“不过就是用XML实现设计师的美术图，用JSON解析服务器的数据，再把数据显示到界面上”就好了，源码什么的，看也好不看也罢，反正应用层的开发用不上，再加上现在优秀的轮子越来越多，拿来主义泛滥，能用就是，反正老板也不关心是不是你自己写的，用我现在老大的话来说，阅读源码似乎只是一种“锦上添花”的事，有自然好，没有也罢。
 那么，作为A">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/16-2-8/20986738.jpg">
-<meta property="og:updated_time" content="2016-06-04T15:42:49.757Z">
+<meta property="og:updated_time" content="2016-06-10T15:16:37.016Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="有没有必要阅读ANDROID源码">
 <meta name="twitter:description" content="或许对于许多Android开发者来说，所谓的Android工程师的工作“不过就是用XML实现设计师的美术图，用JSON解析服务器的数据，再把数据显示到界面上”就好了，源码什么的，看也好不看也罢，反正应用层的开发用不上，再加上现在优秀的轮子越来越多，拿来主义泛滥，能用就是，反正老板也不关心是不是你自己写的，用我现在老大的话来说，阅读源码似乎只是一种“锦上添花”的事，有自然好，没有也罢。
@@ -33,21 +34,27 @@
         <meta rel="publisher" content="https://plus.google.com/113775988407213380000"/>
     
     
+        
     
-        <meta property="og:image" content="/assets/images/avatar_01.png"/>
+    
+        <meta property="og:image" content="http://kaedea.com/assets/images/avatar_01.png"/>
     
     
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/style-27vrduj1jopliavvnzi7ibndpmbvg7lzo4a2uswrsi4m5vwauf2qi8s1v3or.min.css" type="text/css">
     <!--STYLES END-->
+    
     
 </head>
 
     <body>
         <div id="blog">
-            <header id="header" data-behavior="1">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">MOE STUDIO - 萌の軌跡・願いの叶う場所</a>
@@ -57,17 +64,25 @@
             <a  class="header-right-icon st-search-show-outputs"
                 href="/#search">
         
-                <i class="fa fa-lg fa-search"></i>
-            </a>
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
     
 </header>
-            <nav id="sidebar" data-behavior="1">
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
     
         <div class="sidebar-profile">
             <a href="/#about">
-                
                     <img class="sidebar-profile-picture" src="/assets/images/avatar_01.png"/>
-                
             </a>
             <span class="sidebar-profile-name">Kaede Akatsuki</span>
         </div>
@@ -107,7 +122,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
-                    <span class="sidebar-button-desc">Archive</span>
+                    <span class="sidebar-button-desc">Archives</span>
                 </a>
         </li>
         
@@ -131,7 +146,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-terminal"></i>
-                    <span class="sidebar-button-desc">Me</span>
+                    <span class="sidebar-button-desc">About</span>
                 </a>
         </li>
         
@@ -185,7 +200,7 @@
 <article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-        <div class="post-header main-content-wrap text-left">
+        <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
             有没有必要阅读ANDROID源码
@@ -198,7 +213,7 @@
     	
     </time>
     
-        <span>in </span>
+        <span>IN </span>
         
     <a class="category-link" href="/categories/Android/">Android</a>
 
@@ -227,15 +242,12 @@
 <p>最后，我想说的是，每个人对技术的追求不一样，有的人总是恨不得多知道一点，有的只需要日复一日地重复类似的码代码工作就足够了。所以，“需不需要阅读源码”就是一个伪命题，对任何人来说答案都不太一样。不过，既然Android相比隔壁iOS最大的优势在于开源，如果你还在犹豫要不要阅读源码，我建议有时间还是稍微看看吧，万一就打开新世界的大门呢？</p>
 
             
-                
-
-            
         </div>
     </div>
-    <div class="post-footer main-content-wrap">
+    <div id="post-footer" class="post-footer main-content-wrap">
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">Tagged in</span><br/>
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/Android/">Android</a> <a class="tag tag--primary tag--small t-link" href="/tags/源码/">源码</a>
 
@@ -269,23 +281,20 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2016/02/08/android-about-source-code/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://kaedea.com/2016/02/08/android-about-source-code/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/02/08/android-about-source-code/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://kaedea.com/2016/02/08/android-about-source-code/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/02/08/android-about-source-code/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-
-         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2016/02/08/android-about-source-code/&amp;title=有没有必要阅读ANDROID源码">
-                <i class="fa fa-weibo"></i>
-            </a>
-        </li>
-
         
             <li class="post-action">
                 <a class="post-action-btn btn btn--default" href="#disqus_thread">
@@ -305,9 +314,11 @@
 
 
         
-            <div id="disqus_thread">
+            
+                <div id="disqus_thread">
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+            
         
     </div>
 </article>
@@ -351,23 +362,20 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2016/02/08/android-about-source-code/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://kaedea.com/2016/02/08/android-about-source-code/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/02/08/android-about-source-code/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://kaedea.com/2016/02/08/android-about-source-code/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/02/08/android-about-source-code/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-
-         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2016/02/08/android-about-source-code/&amp;title=有没有必要阅读ANDROID源码">
-                <i class="fa fa-weibo"></i>
-            </a>
-        </li>
-
         
             <li class="post-action">
                 <a class="post-action-btn btn btn--default" href="#disqus_thread">
@@ -409,7 +417,14 @@
 <div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
-        <div id="about">
+        
+
+
+    
+        
+    
+
+<div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-remove"></i>
@@ -419,14 +434,14 @@
         
             <h4 id="about-card-name">Kaede Akatsuki</h4>
         
-            <h5 id="about-card-bio"><p>我叫小风（Kaede）<br>爱好是程序设计、日本语、ACG<br>具体介绍可以参考 <a href="/about">About</a></p>
+            <h5 id="about-card-bio"><p>中二病ANDROID魔法使い<br>兴趣是日本语、程序设计、萌产物<br>具体介绍可以参考 <a href="/about">About</a></p>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br/>
-                <p>Android 开发</p>
+                <p>ANDROID開発</p>
 
             </h5>
         
@@ -440,22 +455,31 @@
     </div>
 </div>
 
-        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/29875909.jpg');"></div>
+        
+<div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/29875909.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<script src="/assets/js/scrip-tu4ziscb5jrkjxubeugdgizktyuugflfq5jvgz4agzzmwifuq01g1lmq8giw.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
 
-    <script type="text/javascript">
-        var disqus_shortname = 'kidhaibara';
-        (function() {
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://kaedea.com/2016/02/08/android-about-source-code/';
+                 
+                    this.page.identifier = '2016/02/08/android-about-source-code/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'kidhaibara';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
 
 
     <script type="text/javascript">

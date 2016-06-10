@@ -9,10 +9,11 @@
     <title>简单的动态加载模式 - MOE STUDIO - 萌の軌跡・願いの叶う場所</title>
     <meta name="author" content="Kaede Akatsuki">
     
-        <link rel="icon" href="/assets/images/favicon2.png">
+    
+        <link rel="icon" href="http://kaedea.com/assets/images/favicon2.png">
     
     
-        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
     <meta name="description" content="从这个章节开始，加载SO库的问题算是告一段落，现在开始谈及的动态加载，主要是指基于ClassLoader的加载方式，这也是这个动态加载系列文章的核心。
 Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件里面的类的。Android也类似，不过Android用的是Dalvik/ART虚拟机，不是JVM，也不能直接加载 .jar 文件，而是加载 .dex 文件。通过An">
@@ -22,7 +23,7 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
 <meta property="og:site_name" content="MOE STUDIO - 萌の軌跡・願いの叶う場所">
 <meta property="og:description" content="从这个章节开始，加载SO库的问题算是告一段落，现在开始谈及的动态加载，主要是指基于ClassLoader的加载方式，这也是这个动态加载系列文章的核心。
 Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件里面的类的。Android也类似，不过Android用的是Dalvik/ART虚拟机，不是JVM，也不能直接加载 .jar 文件，而是加载 .dex 文件。通过An">
-<meta property="og:updated_time" content="2016-06-06T15:31:41.283Z">
+<meta property="og:updated_time" content="2016-06-10T15:14:33.560Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简单的动态加载模式">
 <meta name="twitter:description" content="从这个章节开始，加载SO库的问题算是告一段落，现在开始谈及的动态加载，主要是指基于ClassLoader的加载方式，这也是这个动态加载系列文章的核心。
@@ -32,21 +33,27 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
         <meta rel="publisher" content="https://plus.google.com/113775988407213380000"/>
     
     
+        
     
-        <meta property="og:image" content="/assets/images/avatar_01.png"/>
+    
+        <meta property="og:image" content="http://kaedea.com/assets/images/avatar_01.png"/>
     
     
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/style-27vrduj1jopliavvnzi7ibndpmbvg7lzo4a2uswrsi4m5vwauf2qi8s1v3or.min.css" type="text/css">
     <!--STYLES END-->
+    
     
 </head>
 
     <body>
         <div id="blog">
-            <header id="header" data-behavior="1">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">MOE STUDIO - 萌の軌跡・願いの叶う場所</a>
@@ -56,17 +63,25 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
             <a  class="header-right-icon st-search-show-outputs"
                 href="/#search">
         
-                <i class="fa fa-lg fa-search"></i>
-            </a>
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
     
 </header>
-            <nav id="sidebar" data-behavior="1">
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
     
         <div class="sidebar-profile">
             <a href="/#about">
-                
                     <img class="sidebar-profile-picture" src="/assets/images/avatar_01.png"/>
-                
             </a>
             <span class="sidebar-profile-name">Kaede Akatsuki</span>
         </div>
@@ -106,7 +121,7 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
-                    <span class="sidebar-button-desc">Archive</span>
+                    <span class="sidebar-button-desc">Archives</span>
                 </a>
         </li>
         
@@ -130,7 +145,7 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-terminal"></i>
-                    <span class="sidebar-button-desc">Me</span>
+                    <span class="sidebar-button-desc">About</span>
                 </a>
         </li>
         
@@ -184,7 +199,7 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
 <article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-        <div class="post-header main-content-wrap text-left">
+        <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
             简单的动态加载模式
@@ -197,7 +212,7 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
     	
     </time>
     
-        <span>in </span>
+        <span>IN </span>
         
     <a class="category-link" href="/categories/Android/">Android</a>, <a class="category-link" href="/categories/Android/动态加载/">动态加载</a>
 
@@ -254,15 +269,12 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
 </ul>
 
             
-                
-
-            
         </div>
     </div>
-    <div class="post-footer main-content-wrap">
+    <div id="post-footer" class="post-footer main-content-wrap">
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">Tagged in</span><br/>
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/Android/">Android</a> <a class="tag tag--primary tag--small t-link" href="/tags/动态加载/">动态加载</a> <a class="tag tag--primary tag--small t-link" href="/tags/插件化/">插件化</a>
 
@@ -296,23 +308,20 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-
-         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/&amp;title=简单的动态加载模式">
-                <i class="fa fa-weibo"></i>
-            </a>
-        </li>
-
         
             <li class="post-action">
                 <a class="post-action-btn btn btn--default" href="#disqus_thread">
@@ -332,9 +341,11 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
 
 
         
-            <div id="disqus_thread">
+            
+                <div id="disqus_thread">
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+            
         
     </div>
 </article>
@@ -378,23 +389,20 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-
-         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/&amp;title=简单的动态加载模式">
-                <i class="fa fa-weibo"></i>
-            </a>
-        </li>
-
         
             <li class="post-action">
                 <a class="post-action-btn btn btn--default" href="#disqus_thread">
@@ -436,7 +444,14 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
 <div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
-        <div id="about">
+        
+
+
+    
+        
+    
+
+<div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-remove"></i>
@@ -446,14 +461,14 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
         
             <h4 id="about-card-name">Kaede Akatsuki</h4>
         
-            <h5 id="about-card-bio"><p>我叫小风（Kaede）<br>爱好是程序设计、日本语、ACG<br>具体介绍可以参考 <a href="/about">About</a></p>
+            <h5 id="about-card-bio"><p>中二病ANDROID魔法使い<br>兴趣是日本语、程序设计、萌产物<br>具体介绍可以参考 <a href="/about">About</a></p>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br/>
-                <p>Android 开发</p>
+                <p>ANDROID開発</p>
 
             </h5>
         
@@ -467,22 +482,31 @@ Java程序中，JVM虚拟机是通过类加载器ClassLoader加载 .jar 文件�
     </div>
 </div>
 
-        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/29875909.jpg');"></div>
+        
+<div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/29875909.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<script src="/assets/js/scrip-tu4ziscb5jrkjxubeugdgizktyuugflfq5jvgz4agzzmwifuq01g1lmq8giw.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
 
-    <script type="text/javascript">
-        var disqus_shortname = 'kidhaibara';
-        (function() {
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://kaedea.com/2016/06/04/android-dynamical-loading-05-so-simple-mode/';
+                 
+                    this.page.identifier = '2016/06/04/android-dynamical-loading-05-so-simple-mode/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'kidhaibara';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
 
 
     <script type="text/javascript">

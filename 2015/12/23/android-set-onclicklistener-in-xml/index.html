@@ -9,10 +9,11 @@
     <title>在XML布局里给VIEW设置点击事件 - MOE STUDIO - 萌の軌跡・願いの叶う場所</title>
     <meta name="author" content="Kaede Akatsuki">
     
-        <link rel="icon" href="/assets/images/favicon2.png">
+    
+        <link rel="icon" href="http://kaedea.com/assets/images/favicon2.png">
     
     
-        <link rel="alternative" type="application/atom+xml" title="RSS" href="/atom.xml">
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
     <meta name="description" content="Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过android:onClick属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。">
 <meta property="og:type" content="blog">
@@ -22,7 +23,7 @@
 <meta property="og:description" content="Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过android:onClick属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-12-22/30732155.jpg">
 <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-12-22/51841820.jpg">
-<meta property="og:updated_time" content="2016-06-04T15:44:29.436Z">
+<meta property="og:updated_time" content="2016-06-10T14:59:52.704Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在XML布局里给VIEW设置点击事件">
 <meta name="twitter:description" content="Android开发中，可以在Java代码里给View设置点击事件，也可以直接在XML布局里通过android:onClick属性设置回调，这篇日志注意是从源码角度分析后者的实现方式。">
@@ -31,24 +32,30 @@
         <meta rel="publisher" content="https://plus.google.com/113775988407213380000"/>
     
     
+        
     
-        <meta property="og:image" content="/assets/images/avatar_01.png"/>
+    
+        <meta property="og:image" content="http://kaedea.com/assets/images/avatar_01.png"/>
     
     
-        <meta property="og:image" content="/2015/12/23/android-set-onclicklistener-in-xml/http://7xih5c.com1.z0.glb.clouddn.com/15-12-27/38510906.jpg"/>
-        <meta class="swiftype" name="image" data-type="enum" content="http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/http://7xih5c.com1.z0.glb.clouddn.com/15-12-27/38510906.jpg" />
+        <meta property="og:image" content="http://7xih5c.com1.z0.glb.clouddn.com/15-12-27/38510906.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://7xih5c.com1.z0.glb.clouddn.com/15-12-27/38510906.jpg" />
     
     
     
     <!--STYLES-->
-    <link rel="stylesheet" href="/assets/css/style.min.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/style-27vrduj1jopliavvnzi7ibndpmbvg7lzo4a2uswrsi4m5vwauf2qi8s1v3or.min.css" type="text/css">
     <!--STYLES END-->
+    
     
 </head>
 
     <body>
         <div id="blog">
-            <header id="header" data-behavior="1">
+            <!-- Define author's picture -->
+
+
+<header id="header" data-behavior="1">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <h1 class="header-title">
         <a class="header-title-link" href="/ ">MOE STUDIO - 萌の軌跡・願いの叶う場所</a>
@@ -58,17 +65,25 @@
             <a  class="header-right-icon st-search-show-outputs"
                 href="/#search">
         
-                <i class="fa fa-lg fa-search"></i>
-            </a>
+        
+            <i class="fa fa-lg fa-search"></i>
+        
+        </a>
     
 </header>
-            <nav id="sidebar" data-behavior="1">
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="1">
     
         <div class="sidebar-profile">
             <a href="/#about">
-                
                     <img class="sidebar-profile-picture" src="/assets/images/avatar_01.png"/>
-                
             </a>
             <span class="sidebar-profile-name">Kaede Akatsuki</span>
         </div>
@@ -108,7 +123,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-bars"></i>
-                    <span class="sidebar-button-desc">Archive</span>
+                    <span class="sidebar-button-desc">Archives</span>
                 </a>
         </li>
         
@@ -132,7 +147,7 @@
                     >
                 
                     <i class="sidebar-button-icon fa fa-lg fa-terminal"></i>
-                    <span class="sidebar-button-desc">Me</span>
+                    <span class="sidebar-button-desc">About</span>
                 </a>
         </li>
         
@@ -186,7 +201,7 @@
 <article class="post" itemscope itemType="http://schema.org/BlogPosting">
     
     
-        <div class="post-header main-content-wrap text-left">
+        <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title" itemprop="headline">
             在XML布局里给VIEW设置点击事件
@@ -199,7 +214,7 @@
     	
     </time>
     
-        <span>in </span>
+        <span>IN </span>
         
     <a class="category-link" href="/categories/Android/">Android</a>
 
@@ -232,15 +247,12 @@
 <p>最后，特别需要补充说明的是，使用<code>android:onClick</code>给View设置点击事件，就意味着要在Activity里添加一个非接口的public方法。现在Android的开发趋势是“不要把业务逻辑写在Activity类里面”，这样做有利于项目的维护，防止Activity爆炸，所以尽量不要在Activity里出现非接口、非生命周期的public方法。因此，贸然使用<code>android:onClick</code>可能会“污染”Activity。</p>
 
             
-                
-
-            
         </div>
     </div>
-    <div class="post-footer main-content-wrap">
+    <div id="post-footer" class="post-footer main-content-wrap">
         
             <div class="post-footer-tags">
-                <span class="text-color-light text-small">Tagged in</span><br/>
+                <span class="text-color-light text-small">TAGGED IN</span><br/>
                 
     <a class="tag tag--primary tag--small t-link" href="/tags/Android/">Android</a> <a class="tag tag--primary tag--small t-link" href="/tags/XML布局/">XML布局</a> <a class="tag tag--primary tag--small t-link" href="/tags/点击事件/">点击事件</a>
 
@@ -259,7 +271,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/05/whisper-change-job/" data-tooltip="年轻人换工作不频繁难道换女票频繁么">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/05/whisper-change-job/" data-tooltip="吐槽・年轻人换工作不频繁难道换女票频繁么">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -274,23 +286,20 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-
-         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/&amp;title=在XML布局里给VIEW设置点击事件">
-                <i class="fa fa-weibo"></i>
-            </a>
-        </li>
-
         
             <li class="post-action">
                 <a class="post-action-btn btn btn--default" href="#disqus_thread">
@@ -310,9 +319,11 @@
 
 
         
-            <div id="disqus_thread">
+            
+                <div id="disqus_thread">
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 </div>
+            
         
     </div>
 </article>
@@ -341,7 +352,7 @@
             </li>
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/05/whisper-change-job/" data-tooltip="年轻人换工作不频繁难道换女票频繁么">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2015/12/05/whisper-change-job/" data-tooltip="吐槽・年轻人换工作不频繁难道换女票频繁么">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right"></i>
@@ -356,23 +367,20 @@
             </a>
         </li>
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Google+" href="https://plus.google.com/share?url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
                 <i class="fa fa-google-plus"></i>
             </a>
         </li>
-       
         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至Twitter" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
+                <i class="fa fa-facebook-official"></i>
+            </a>
+        </li>
+        <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/">
                 <i class="fa fa-twitter"></i>
             </a>
         </li>
-
-         <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" data-tooltip="分享至新浪微博" href="http://www.jiathis.com/send/?webid=tsina&amp;appkey=&amp;uid=1850331&amp;url=http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/&amp;title=在XML布局里给VIEW设置点击事件">
-                <i class="fa fa-weibo"></i>
-            </a>
-        </li>
-
         
             <li class="post-action">
                 <a class="post-action-btn btn btn--default" href="#disqus_thread">
@@ -414,7 +422,14 @@
 <div id="share-options-mask" class="share-options-mask"></div>
             
         </div>
-        <div id="about">
+        
+
+
+    
+        
+    
+
+<div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-remove"></i>
@@ -424,14 +439,14 @@
         
             <h4 id="about-card-name">Kaede Akatsuki</h4>
         
-            <h5 id="about-card-bio"><p>我叫小风（Kaede）<br>爱好是程序设计、日本语、ACG<br>具体介绍可以参考 <a href="/about">About</a></p>
+            <h5 id="about-card-bio"><p>中二病ANDROID魔法使い<br>兴趣是日本语、程序设计、萌产物<br>具体介绍可以参考 <a href="/about">About</a></p>
 </h5>
         
         
             <h5 id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br/>
-                <p>Android 开发</p>
+                <p>ANDROID開発</p>
 
             </h5>
         
@@ -445,22 +460,31 @@
     </div>
 </div>
 
-        <div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/29875909.jpg');"></div>
+        
+<div id="cover" style="background-image:url('http://7xih5c.com1.z0.glb.clouddn.com/15-10-7/29875909.jpg');"></div>
     </body>
     <!--SCRIPTS-->
-<script src="/assets/js/script.min.js" type="text/javascript"></script>
+<script src="/assets/js/scrip-tu4ziscb5jrkjxubeugdgizktyuugflfq5jvgz4agzzmwifuq01g1lmq8giw.min.js" type="text/javascript"></script>
 <!--SCRIPTS END-->
 
-    <script type="text/javascript">
-        var disqus_shortname = 'kidhaibara';
-        (function() {
-            var dsq = document.createElement('script');
-            dsq.type = 'text/javascript';
-            dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script>
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://kaedea.com/2015/12/23/android-set-onclicklistener-in-xml/';
+                 
+                    this.page.identifier = '2015/12/23/android-set-onclicklistener-in-xml/';
+                                  
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'kidhaibara';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
 
 
     <script type="text/javascript">
