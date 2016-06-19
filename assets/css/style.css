@@ -2203,7 +2203,7 @@ h4,
 h5,
 h6 {
   letter-spacing: -0.04em;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Nexa Bold", "Helvetica Neue", Helvetica, sans-serif, Helvetica, sans-serif;
   font-weight: 700;
   line-height: 1.45em;
   color: #4a4a4a; }
@@ -3233,7 +3233,7 @@ figure.highlight,
     width: 100%; }
     figure.highlight .code pre,
     .codeblock .code pre {
-      max-width: calc(750px - 50px);
+      max-width: calc(850px - 50px);
       overflow-x: auto;
       overflow-y: hidden; }
   figure.highlight .line,
@@ -3440,7 +3440,7 @@ a.fancybox {
 
 .main-content-wrap {
   display: block;
-  max-width: 750px;
+  max-width: 850px;
   margin: 0 auto;
   padding-right: 20px;
   padding-left: 20px; }
@@ -3529,7 +3529,7 @@ a.fancybox {
   .post .post-content {
     text-rendering: optimizelegibility;
     letter-spacing: -0.3px;
-    font-family: "Merriweather", serif;
+    font-family: "Nexa Light", "Helvetica Neue", Helvetica, sans-serif, Helvetica, sans-serif;
     color: #5d686f;
     margin-top: 20px;
     font-weight: 400;
@@ -3645,7 +3645,7 @@ a.fancybox {
     display: table-cell;
     vertical-align: middle; }
     .post-header-cover .post-header .post-title {
-      max-width: 750px;
+      max-width: 850px;
       margin: 0 auto;
       color: white;
       text-shadow: 0 2px 0 rgba(0, 0, 0, 0.9);
@@ -3653,7 +3653,7 @@ a.fancybox {
       .post-header-cover .post-header .post-title:hover {
         text-decoration: none; }
     .post-header-cover .post-header .post-meta {
-      max-width: 750px;
+      max-width: 850px;
       font-family: "Open Sans", sans-serif;
       font-size: 1.6rem;
       color: white !important;
@@ -3772,7 +3772,7 @@ a.fancybox {
   .postShorten .postShorten-content {
     text-rendering: optimizelegibility;
     letter-spacing: -0.3px;
-    font-family: "Merriweather", serif;
+    font-family: "Nexa Light", "Helvetica Neue", Helvetica, sans-serif, Helvetica, sans-serif;
     color: #5d686f;
     font-weight: 400;
     overflow: hidden;
@@ -3783,7 +3783,10 @@ a.fancybox {
     .postShorten .postShorten-content img {
       display: block;
       width: auto;
-      max-width: 100%; }
+      max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 7px; }
   .postShorten .postShorten-excerpt {
     margin-top: 15px; }
   .postShorten .postShorten-content {
@@ -3804,7 +3807,8 @@ a.fancybox {
       width: 140px;
       height: 140px;
       object-fit: cover;
-      overflow: hidden; }
+      overflow: hidden;
+      border-radius: 7px; }
   .postShorten.postShorten--thumbnailimg-right .postShorten-wrap {
     float: left;
     width: calc(100% - 140px - 20px); }
@@ -3816,7 +3820,8 @@ a.fancybox {
       width: 140px;
       height: 140px;
       object-fit: cover;
-      overflow: hidden; }
+      overflow: hidden;
+      border-radius: 7px; }
   .postShorten.postShorten--thumbnailimg-left .postShorten-wrap {
     float: right;
     width: calc(100% - 140px - 20px); }
@@ -3830,7 +3835,8 @@ a.fancybox {
     margin: 15px 0 15px 0; }
     .postShorten.postShorten--thumbnailimg-bottom .postShorten-thumbnailimg img {
       width: auto;
-      height: auto; } }
+      height: auto;
+      border-radius: 7px; } }
 
 .share-options-bar {
   position: fixed;
@@ -4716,10 +4722,8 @@ figure.highlight,
   .codeblock.swift .number,
   .codeblock.swift .type {
     color: #0086b3; }
-  figure.highlight.yml .line
-.attr,
-  .codeblock.yml .line
-.attr {
+  figure.highlight.yml .line .attr,
+  .codeblock.yml .line .attr {
     color: #63a35c; }
   figure.highlight.yml .line,
   figure.highlight.yml .string,

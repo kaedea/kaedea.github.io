@@ -2585,8 +2585,10 @@ figure.highlight,
   .codeblock.swift .number,
   .codeblock.swift .type {
     color: #0086b3; }
-  figure.highlight.yml .line .attr,
-  .codeblock.yml .line .attr {
+  figure.highlight.yml .line
+.attr,
+  .codeblock.yml .line
+.attr {
     color: #63a35c; }
   figure.highlight.yml .line,
   figure.highlight.yml .string,
