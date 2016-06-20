@@ -2404,6 +2404,9 @@ blockquote {
     #about #about-card #about-card-location {
       display: inline-block;
       vertical-align: top; }
+      #about #about-card #about-card-job p,
+      #about #about-card #about-card-location p {
+        margin: 0 0 0 0; }
     #about #about-card #about-card-job,
     #about #about-card #about-card-location,
     #about #about-card #about-card-bio {
@@ -2499,7 +2502,7 @@ blockquote {
       -moz-transform: translate3d(75px, 0, 0);
       transform: translate3d(75px, 0, 0); } }
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 1024px) and (max-width: 1559px) {
   #bottom-bar[data-behavior="1"] {
     width: calc(100% - 250px - 15px * 2);
     left: 250px; }
@@ -2507,6 +2510,36 @@ blockquote {
       -webkit-transform: translate3d(250px, 0, 0);
       -moz-transform: translate3d(250px, 0, 0);
       transform: translate3d(250px, 0, 0); }
+  #bottom-bar[data-behavior="2"] {
+    width: calc(100% - 75px - 15px * 2);
+    left: 75px; }
+    #bottom-bar[data-behavior="2"].pushed {
+      -webkit-transform: translate3d(75px, 0, 0);
+      -moz-transform: translate3d(75px, 0, 0);
+      transform: translate3d(75px, 0, 0); }
+  #bottom-bar[data-behavior="3"] {
+    width: calc(100% - 15px * 2);
+    left: 0; }
+    #bottom-bar[data-behavior="3"].pushed {
+      -webkit-transform: translate3d(250px, 0, 0);
+      -moz-transform: translate3d(250px, 0, 0);
+      transform: translate3d(250px, 0, 0); }
+  #bottom-bar[data-behavior="4"] {
+    width: calc(100% - 15px * 2);
+    left: 0; }
+    #bottom-bar[data-behavior="4"].pushed {
+      -webkit-transform: translate3d(75px, 0, 0);
+      -moz-transform: translate3d(75px, 0, 0);
+      transform: translate3d(75px, 0, 0); } }
+
+@media only screen and (min-width: 1560px) {
+  #bottom-bar[data-behavior="1"] {
+    width: calc(100% - 550px - 15px * 2);
+    left: 550px; }
+    #bottom-bar[data-behavior="1"].pushed {
+      -webkit-transform: translate3d(550px, 0, 0);
+      -moz-transform: translate3d(550px, 0, 0);
+      transform: translate3d(550px, 0, 0); }
   #bottom-bar[data-behavior="2"] {
     width: calc(100% - 75px - 15px * 2);
     left: 75px; }
@@ -3124,9 +3157,9 @@ blockquote {
             letter-spacing: 0.3px;
             vertical-align: middle; }
     #sidebar[data-behavior="1"].pushed {
-      -webkit-transform: translate3d(250px, 0, 0);
-      -moz-transform: translate3d(250px, 0, 0);
-      transform: translate3d(250px, 0, 0); }
+      -webkit-transform: translate3d(550px, 0, 0);
+      -moz-transform: translate3d(550px, 0, 0);
+      transform: translate3d(550px, 0, 0); }
   #sidebar[data-behavior="2"] {
     width: 75px; }
     #sidebar[data-behavior="2"] .sidebar-profile .sidebar-profile-picture {
@@ -3294,7 +3327,8 @@ blockquote {
     .archive .archive-posts .archive-post .archive-post-title:hover {
       text-decoration: underline; }
   .archive .archive-posts .archive-post .archive-post-date {
-    color: #9eabb3; }
+    color: #9eabb3;
+    float: right; }
   .archive .archive-posts .archive-post::before {
     font-family: 'FontAwesome';
     content: '\f0da';
@@ -3745,18 +3779,36 @@ a.fancybox {
       margin-bottom: 10px;
       border-bottom: 1px solid #eef2f8; }
 
-@media only screen and (min-width: 768px) and (max-width: 1023px) {
-  .post .post-header .post-title {
-    font-size: 3.3rem; } }
+/**
+// Increase the font size of the post's title on medium screen (only for single post view)
+@media only screen and (min-width : 768px) and (max-width : 1023px) {
+    .post {
+        .post-header {
+            .post-title {
+                font-size: map-get($headings-font-size, h1) + 0.5rem;
+            }
+        }
+    }
+}
 
-@media only screen and (min-width: 1024px) {
-  .post .post-header .post-title {
-    font-size: 3.7rem; } }
+// Increase font size of the post's title on large screen (only for single post view)
+@media only screen and (min-width : 1024px) {
+    .post {
+        .post-header {
+            .post-title {
+                font-size: map-get($headings-font-size, h1) + 0.9rem;
+            }
+        }
+    }
+}
 
-@media only screen and (min-width: 768px) {
-  .post-content {
-    font-size: 1.7rem; } }
-
+// Increase font-size on medium and large screen
+@media only screen and (min-width : 768px) {
+    .post-content {
+        font-size: 1.7rem;
+    }
+}
+**/
 .post-actions-wrap {
   height: 60px;
   padding: 0;
