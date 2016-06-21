@@ -2201,7 +2201,7 @@ body {
   padding: 0;
   background: white;
   font-family: Lato, Helvetica Neue, Arial, sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   line-height: 1.9em;
   letter-spacing: 0.01em;
   -webkit-font-smoothing: subpixel-antialiased;
@@ -2232,22 +2232,22 @@ h6 {
   margin: 1em 0 0.5em 0; }
 
 h1 {
-  font-size: 2.8rem; }
-
-h2 {
   font-size: 2.4rem; }
 
+h2 {
+  font-size: 2.1rem; }
+
 h3 {
-  font-size: 2rem; }
+  font-size: 1.9rem; }
 
 h4 {
-  font-size: 1.8rem; }
-
-h5 {
   font-size: 1.7rem; }
 
-h6 {
+h5 {
   font-size: 1.6rem; }
+
+h6 {
+  font-size: 1.5rem; }
 
 p {
   margin: 1.5em 0 0 0; }
@@ -2303,8 +2303,8 @@ pre > code {
   margin: 0;
   cursor: text;
   overflow-x: auto;
-  line-height: 1.7em;
-  font-size: 1.4rem; }
+  line-height: 1.6em;
+  font-size: 1.2rem; }
 
 code {
   font-size: 1.5rem;
@@ -2333,31 +2333,31 @@ blockquote {
   code {
     font-size: 1.4rem; }
   h1 {
-    font-size: 2.6rem; }
-  h2 {
     font-size: 2.2rem; }
+  h2 {
+    font-size: 1.9rem; }
   h3 {
-    font-size: 1.8rem; }
+    font-size: 1.7rem; }
   h4 {
-    font-size: 1.6rem; }
-  h5 {
     font-size: 1.5rem; }
+  h5 {
+    font-size: 1.4rem; }
   h6 {
-    font-size: 1.4rem; } }
+    font-size: 1.3rem; } }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   h1 {
-    font-size: 2.65rem; }
-  h2 {
     font-size: 2.25rem; }
+  h2 {
+    font-size: 1.95rem; }
   h3 {
-    font-size: 1.85rem; }
+    font-size: 1.75rem; }
   h4 {
-    font-size: 1.65rem; }
-  h5 {
     font-size: 1.55rem; }
+  h5 {
+    font-size: 1.45rem; }
   h6 {
-    font-size: 1.45rem; } }
+    font-size: 1.35rem; } }
 
 #about {
   display: none;
@@ -2410,7 +2410,7 @@ blockquote {
     #about #about-card #about-card-job,
     #about #about-card #about-card-location,
     #about #about-card #about-card-bio {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       line-height: 1.9em;
       font-weight: 400;
       color: #5d686f; }
@@ -2619,7 +2619,7 @@ blockquote {
     color: #88909a; }
   #header .header-title {
     text-align: center;
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     line-height: 55px;
     margin: 0; }
     #header .header-title .header-title-link {
@@ -3350,7 +3350,7 @@ blockquote {
   padding: 8px 15px;
   margin: 0;
   letter-spacing: 0.01em;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   cursor: pointer; }
   .btn:hover, .btn:focus, .btn:active {
     text-decoration: none; }
@@ -3411,7 +3411,7 @@ blockquote {
 figure.highlight,
 .codeblock {
   margin: 10px 0;
-  line-height: 1.3em;
+  line-height: 1.2em;
   padding-top: 15px;
   padding-bottom: 15px;
   overflow: hidden; }
@@ -3464,8 +3464,8 @@ figure.highlight,
       overflow-y: hidden; }
   figure.highlight .line,
   .codeblock .line {
-    height: 1.3em;
-    font-size: 1.4rem; }
+    height: 1.2em;
+    font-size: 1.2rem; }
 
 .codeblock--tabbed figure.highlight,
 .codeblock--tabbed pre > code {
@@ -3673,45 +3673,45 @@ a.fancybox {
 
 @media only screen and (min-width: 1024px) {
   .markdown h1 {
-    font-size: 3rem; }
-  .markdown h2 {
-    font-size: 2.7rem; }
-  .markdown h3 {
     font-size: 2.4rem; }
-  .markdown h4 {
+  .markdown h2 {
     font-size: 2.1rem; }
-  .markdown h5 {
+  .markdown h3 {
     font-size: 1.9rem; }
+  .markdown h4 {
+    font-size: 1.7rem; }
+  .markdown h5 {
+    font-size: 1.6rem; }
   .markdown h6 {
-    font-size: 1.7rem; } }
+    font-size: 1.5rem; } }
 
 @media only screen and (max-width: 767px) {
   .markdown h1 {
-    font-size: 2.65rem; }
-  .markdown h2 {
-    font-size: 2.35rem; }
-  .markdown h3 {
     font-size: 2.05rem; }
-  .markdown h4 {
+  .markdown h2 {
     font-size: 1.75rem; }
-  .markdown h5 {
+  .markdown h3 {
     font-size: 1.55rem; }
+  .markdown h4 {
+    font-size: 1.35rem; }
+  .markdown h5 {
+    font-size: 1.25rem; }
   .markdown h6 {
-    font-size: 1.35rem; } }
+    font-size: 1.15rem; } }
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .markdown h1 {
-    font-size: 2.8rem; }
-  .markdown h2 {
-    font-size: 2.5rem; }
-  .markdown h3 {
     font-size: 2.2rem; }
-  .markdown h4 {
+  .markdown h2 {
     font-size: 1.9rem; }
-  .markdown h5 {
+  .markdown h3 {
     font-size: 1.7rem; }
+  .markdown h4 {
+    font-size: 1.5rem; }
+  .markdown h5 {
+    font-size: 1.4rem; }
   .markdown h6 {
-    font-size: 1.5rem; } }
+    font-size: 1.3rem; } }
 
 .pagination-bar {
   height: auto;
@@ -3737,7 +3737,8 @@ a.fancybox {
   position: relative;
   width: 100%;
   display: inline-block;
-  vertical-align: top; }
+  vertical-align: top;
+  margin-top: 24px; }
   .post .post-header .post-title {
     margin: 0;
     word-break: initial;
@@ -3902,7 +3903,7 @@ a.fancybox {
     .post-header-cover .post-header .post-meta {
       max-width: 850px;
       font-family: Lato, Noto Sans SC, Helvetica Neue, Microsoft Yahei, Arial, sans-serif;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       color: white !important;
       font-weight: 400;
       letter-spacing: 0.05em;
@@ -3919,11 +3920,11 @@ a.fancybox {
 
 @media only screen and (max-width: 479px) {
   .post-header-cover .post-header .post-title {
-    font-size: 2.8rem; } }
+    font-size: 2.4rem; } }
 
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   .post-header-cover .post-header .post-title {
-    font-size: 3.3rem; } }
+    font-size: 2.9rem; } }
 
 @media only screen and (max-width: 767px) {
   .post-header-cover {
@@ -3940,7 +3941,7 @@ a.fancybox {
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
   .post-header-cover .post-header .post-title {
-    font-size: 5.8rem;
+    font-size: 5.4rem;
     line-height: 1.3em; }
   .post-header-cover[data-behavior="1"], .post-header-cover[data-behavior="2"] {
     width: calc(100% - 75px);
@@ -3962,7 +3963,7 @@ a.fancybox {
 
 @media only screen and (min-width: 1024px) {
   .post-header-cover .post-header .post-title {
-    font-size: 6.5rem;
+    font-size: 6.1rem;
     line-height: 1.3em; }
   .post-header-cover[data-behavior="1"] {
     width: calc(100% - 250px);
@@ -4250,7 +4251,7 @@ a.tag--small,
   font-size: 1.5rem !important; }
 
 .text-base {
-  font-size: 1.6rem !important; }
+  font-size: 1.5rem !important; }
 
 .text-large {
   font-size: 1.7rem !important; }
