@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="MOE STUDIO - 萌の軌跡・願いの叶う場所">
-    <title>Tag: 动态创建Activity - MOE STUDIO - 萌の軌跡・願いの叶う場所</title>
+    <title>Tag: 主题 - MOE STUDIO - 萌の軌跡・願いの叶う場所</title>
     <meta name="author" content="Kaede Akatsuki">
     
     
@@ -18,7 +18,7 @@
     <meta name="description" content="A TASTE OF NIHON AND CODING.">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="MOE STUDIO - 萌の軌跡・願いの叶う場所">
-<meta property="og:url" content="http://kaedea.com/tags/动态创建Activity/index.html">
+<meta property="og:url" content="http://kaedea.com/tags/主题/index.html">
 <meta property="og:site_name" content="MOE STUDIO - 萌の軌跡・願いの叶う場所">
 <meta property="og:description" content="A TASTE OF NIHON AND CODING.">
 <meta name="twitter:card" content="summary">
@@ -202,21 +202,21 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title" itemprop="headline">
                     
-                        <a class="link-unstyled" href="/2016/06/14/android-dynamical-loading-07-dynamic-activity/">
-                            动态创建ACTIVITY模式
+                        <a class="link-unstyled" href="https://github.com/kaedea/hexo-theme-themia">
+                            HEXO THEME THEMIA 1.7
                         </a>
                     
                 </h1>
                 <div class="postShorten-meta">
-    <time itemprop="datePublished" content="Tue Jun 14 2016 00:00:00 GMT+0800">
+    <time itemprop="datePublished" content="Fri Jun 24 2016 00:00:00 GMT+0800">
 	
-		    Jun 14, 2016
+		    Jun 24, 2016
     	
     </time>
     
         <span>IN </span>
         
-    <a class="category-link" href="/categories/Android/">Android</a>, <a class="category-link" href="/categories/Android/动态加载/">动态加载</a>
+    <a class="category-link" href="/categories/Hexo/">Hexo</a>
 
 
     
@@ -225,21 +225,20 @@
             
             
                 <div class="postShorten-excerpt" itemprop="articleBody">
-                    <p>还记得我们在代理Activity模式里谈到启动插件APK里的Activity的两个难题吗，由于插件里的Activity没在主项目的Manifest里面注册，所以无法经历系统Framework层级的一系列初始化过程，最终导致获得的Activity实例并没有生命周期和无法使用res资源。</p>
-<p>使用代理Activity能够解决这两个问题，但是有一些限制：</p>
-<ul>
-<li>实际运行的Activity实例其实都是ProxyActivity，并不是真正想要启动的Activity；</li>
-<li>ProxyActivity只能指定一种LaunchMode，所以插件里的Activity无法自定义LaunchMode；</li>
-<li>不支持静态注册的BroadcastReceiver；</li>
-<li>往往不是所有的APK都可作为插件被加载，插件项目需要依赖特定的框架，还有需要遵循一定的”开发规范”；</li>
-</ul>
-<p>特别是最后一个，无法直接把一个普通的APK作为插件使用。这个其实也不算是限制，如果我们需要进行插件化开发，我们总希望能够通过一些框架限制和规范插件的行为，在加载插件前就知道插件大概有哪些功能，这样不仅能方便对插件行为的控制，还能在一定程度上确保插件的安全（运行一个完全未知的可执行文件鬼知道它会做些什么）。不过这样做就要求插件必须依赖特定的框架，这对插件是一种侵入式开发，也就是说，开发插件时不能像开发普通APP那样自由。</p>
-<p>那么有办法避开这些限制，做到完全非侵入式开发吗？比如，通过动态加载框架，不用安装就直接运行《Flappy Bird》的APK安装包。这听起来好像是只有获得ROOT权限才能做到的事情，要不然随便写个空壳的APK加载别人的游戏安装包就直接能运行了。不过，确实有人做到了，通过动态生成Activity类的方式。<br>
+                    <p><img src="http://7xih5c.com1.z0.glb.clouddn.com/16-6-24/23334229.jpg" alt=""></p>
+<p><strong>Themia</strong> 是一个华丽的Hexo响应式主题，由 <strong>LouisBarranqueiro</strong> 开发的主题<a href="https://github.com/LouisBarranqueiro/tranquilpeak-hexo-theme">TranquiPeak</a>的基础上改造而来，<strong>大部分功能都是原有主题的</strong>，只是为了我自己的需求做了小部分的修改，主要是针对中文适配做的修改。</p>
+<p>特点</p>
+<ol>
+<li>增加1080P等大屏显示器下的SideBar样式；</li>
+<li>调整文章的样式，比如字体、字体大小、对齐等；</li>
+<li>中英混排自动加入空格（参考 <a href="https://github.com/vinta/pangu.js">pangu.js</a>）；</li>
+<li>同步更新至 TranquiPeak 1.7.1；</li>
+</ol>
+<p>将项目根目录的所有文件复制进一个文件夹，并把该文件夹复制进Hexo项目的themes目录下，再把Hexo的配置文件_config.yml中的theme标签的指改为该文件夹的名称即可。<br>
                     
-                        <a href="/2016/06/14/android-dynamical-loading-07-dynamic-activity/" class="postShorten-excerpt_link link">
-                            CONTINUE READING
+                        <a href="https://github.com/kaedea/hexo-theme-themia" target="new" class="postShorten-excerpt_link link">
+                            OPEN LINK
                         </a>
-                        
                     
                 </div>
             
