@@ -1203,6 +1203,10 @@ blockquote {
     content: '\f0da';
     font-size: 1.3rem; }
 
+@media only screen and (max-width: 479px) {
+  .archive-post-date {
+    display: none; } }
+
 .boxes {
   margin-top: 20px; }
   .boxes .box:nth-child(n + 2) {
@@ -1328,7 +1332,7 @@ figure.highlight,
     width: 100%; }
     figure.highlight .code pre,
     .codeblock .code pre {
-      max-width: calc(850px - 50px);
+      max-width: calc(80% - 50px);
       overflow-x: auto;
       overflow-y: hidden; }
   figure.highlight .line,
@@ -1535,7 +1539,7 @@ a.fancybox {
 
 .main-content-wrap {
   display: block;
-  max-width: 850px;
+  max-width: 80%;
   margin: 0 auto;
   padding-right: 20px;
   padding-left: 20px; }
@@ -1642,6 +1646,14 @@ a.fancybox {
       border-radius: 7px; }
     .post .post-content :not(blockquote):not(.alert) > p {
       margin: 1.5em 0 0 0; }
+  .post .fancybox img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    object-fit: fill;
+    margin-left: inherit;
+    margin-right: inherit;
+    border-radius: inherit; }
   .post .post-footer {
     margin-top: 20px; }
     .post .post-footer-tags {
@@ -1762,7 +1774,7 @@ a.fancybox {
     display: table-cell;
     vertical-align: middle; }
     .post-header-cover .post-header .post-title {
-      max-width: 850px;
+      max-width: 80%;
       margin: 0 auto;
       color: white;
       text-shadow: 0 2px 0 rgba(0, 0, 0, 0.9);
@@ -1770,7 +1782,7 @@ a.fancybox {
       .post-header-cover .post-header .post-title:hover {
         text-decoration: none; }
     .post-header-cover .post-header .post-meta {
-      max-width: 850px;
+      max-width: 80%;
       font-family: Lato, Noto Sans SC, Helvetica Neue, Microsoft Yahei, Arial, sans-serif;
       font-size: 1.5rem;
       color: white !important;
@@ -1906,6 +1918,14 @@ a.fancybox {
       margin-left: auto;
       margin-right: auto;
       border-radius: 7px; }
+  .postShorten .fancybox img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    object-fit: fill;
+    margin-left: inherit;
+    margin-right: inherit;
+    border-radius: inherit; }
   .postShorten .postShorten-excerpt {
     margin-bottom: 15px; }
   .postShorten .postShorten-content {
