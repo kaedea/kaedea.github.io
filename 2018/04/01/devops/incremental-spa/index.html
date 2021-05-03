@@ -88,13 +88,13 @@
 
 
 
-<meta name="description" content="静态程序分析，是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的">
+<meta name="description" content="静态程序分析（Static Program Analyse，又称静态检查、静态分析等），是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内">
 <meta name="keywords" content="DevOps, SPA, 自动化，静态检查">
 <meta property="og:type" content="article">
-<meta property="og:title" content="增量静态检查（SPA）在代码合入检查里的应用">
+<meta property="og:title" content="静态程序分析（SPA）的增量实现以及在代码合入检查里的应用">
 <meta property="og:url" content="http://kaedea.com/2018/04/01/devops/incremental-spa/index.html">
 <meta property="og:site_name" content="中二病也要开发ANDROID">
-<meta property="og:description" content="静态程序分析，是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的">
+<meta property="og:description" content="静态程序分析（Static Program Analyse，又称静态检查、静态分析等），是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://kaedea.com/assets/images/spa/img-git-diff.png">
 <meta property="og:image" content="http://kaedea.com/assets/images/spa/image-lint-workflow.png">
@@ -103,10 +103,10 @@
 <meta property="og:image" content="http://kaedea.com/assets/images/spa/image-demo-1.png">
 <meta property="og:image" content="http://kaedea.com/assets/images/spa/image-demo-1.png">
 <meta property="og:image" content="http://kaedea.com/assets/images/spa/image-demo-1.png">
-<meta property="og:updated_time" content="2021-05-03T15:18:04.150Z">
+<meta property="og:updated_time" content="2021-05-03T15:33:20.603Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="增量静态检查（SPA）在代码合入检查里的应用">
-<meta name="twitter:description" content="静态程序分析，是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的">
+<meta name="twitter:title" content="静态程序分析（SPA）的增量实现以及在代码合入检查里的应用">
+<meta name="twitter:description" content="静态程序分析（Static Program Analyse，又称静态检查、静态分析等），是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内">
 <meta name="twitter:image" content="http://kaedea.com/assets/images/spa/img-git-diff.png">
 
 
@@ -141,7 +141,7 @@
 
 
 
-  <title> 增量静态检查（SPA）在代码合入检查里的应用 | 中二病也要开发ANDROID </title>
+  <title> 静态程序分析（SPA）的增量实现以及在代码合入检查里的应用 | 中二病也要开发ANDROID </title>
 </head>
 
 <!-- move jquery here for loading (originally placed in "_scripts/vendors.swig") -->
@@ -342,7 +342,7 @@
             
             
               
-                增量静态检查（SPA）在代码合入检查里的应用
+                静态程序分析（SPA）的增量实现以及在代码合入检查里的应用
               
             
           </h1>
@@ -363,7 +363,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:18:04+00:00">
+            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
               2021-05-03
             </time>
             
@@ -405,7 +405,7 @@
 
           
           
-             <span id="/2018/04/01/devops/incremental-spa/" class="leancloud_visitors" data-flag-title="增量静态检查（SPA）在代码合入检查里的应用">
+             <span id="/2018/04/01/devops/incremental-spa/" class="leancloud_visitors" data-flag-title="静态程序分析（SPA）的增量实现以及在代码合入检查里的应用">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -430,7 +430,7 @@
       
 
       
-        <p>静态程序分析，是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的 References。</p>
+        <p>静态程序分析（Static Program Analyse，又称静态检查、静态分析等），是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的 References。</p>
 <a id="more"></a>
 <h2 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h2><ol>
 <li>静态程序分析：SPA (Static Program Analysis)，也称静态代码检查、静态扫描、静态检查等（下文统称“静态检查”）</li>
@@ -955,7 +955,7 @@ Incrementals
       var disqus_shortname = 'kidhaibara';
       var disqus_identifier = '2018/04/01/devops/incremental-spa/';
 
-      var disqus_title = "增量静态检查（SPA）在代码合入检查里的应用";
+      var disqus_title = "静态程序分析（SPA）的增量实现以及在代码合入检查里的应用";
 
 
       function run_disqus_script(disqus_script) {
