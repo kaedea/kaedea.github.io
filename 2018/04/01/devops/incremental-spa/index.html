@@ -96,18 +96,18 @@
 <meta property="og:site_name" content="中二病也要开发ANDROID">
 <meta property="og:description" content="静态程序分析，是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://kaedea.com/assets/images/spa/img-git-diff.png">
+<meta property="og:image" content="http://kaedea.com/assets/images/spa/image-lint-workflow.png">
+<meta property="og:image" content="http://kaedea.com/assets/images/spa/image-idea-inspect-code.png">
+<meta property="og:image" content="http://kaedea.com/assets/images/spa/image-workflows.png">
 <meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
 <meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
 <meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
-<meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
-<meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
-<meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
-<meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
-<meta property="og:updated_time" content="2021-05-02T13:13:21.921Z">
+<meta property="og:updated_time" content="2021-05-03T12:53:52.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="静态程序分析（SPA）在代码合入检查里的应用">
 <meta name="twitter:description" content="静态程序分析，是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的">
-<meta name="twitter:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
+<meta name="twitter:image" content="http://kaedea.com/assets/images/spa/img-git-diff.png">
 
 
 
@@ -363,8 +363,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-02T13:13:21+00:00">
-              2021-05-02
+            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T12:53:52+00:00">
+              2021-05-03
             </time>
             
           </span>
@@ -491,7 +491,7 @@ Lint 增量
 <li>当用户 MR 检查出问题后在本地修改代码，我们需要计算出“开发分支与主干分支之间代码的增量信息”叠加“用户新修改问题带来的增量信息”后的最终结果，以便用户检查自己是否已把问题修复</li>
 </ol>
 </blockquote>
-<p>我们计算代码增量信息的方案，全靠 <code>git diff</code> 命令：<br><img src="TODO" alt="man: git diff"></p>
+<p>我们计算代码增量信息的方案，全靠 <code>git diff</code> 命令：<br><img src="/assets/images/spa/img-git-diff.png" alt="man: git diff"></p>
 <p>这里先简单介绍一下我们方案需要用到的这几个参数的作用：</p>
 <ol>
 <li><code>name-only</code>：只显示修改文件的名字，不显示内容，这个参数分别刚好满足上面提到的方案的“文件粒度”和“文件修改行数粒度”</li>
@@ -520,7 +520,7 @@ Android Studio 自带的 lint 检查流程
 -->
 <p>在增量检查的具体实现上，我们采用的是自定义 Gradle 插件，增加了 <code>:checkIncremental</code> 任务来执行增量的检查任务。其中 CheckStyle 检查的实现是基于 Gradle Api 提供相关 Checkstyle Task，这个本身就支持增量检查，直接配置输入文件就好。Lint 的增量检查就要复杂得多，主要是基于 Android 官方的 AGP (Android Gradle Plugin) 插件提供的 <code>com.android.tools.lint:lint-gradle</code> 库进行实现，以下介绍几个关键的技术点。</p>
 <h4 id="Lint-检查的工作流程"><a href="#Lint-检查的工作流程" class="headerlink" title="Lint 检查的工作流程"></a>Lint 检查的工作流程</h4><p>Android Lint 的工作过程比较简单，由一个基础的 Lint 过程由 Lint Tool（检测工具），Source Files（项目源文件） 和 lint.xml（配置文件） 三个部分组成：Lint Tool 读取 Source Files，根据 lint.xml 配置的规则（issue）输出结果，如下图：</p>
-<p><img src="TODO" alt="Lint 工作流程示意图"></p>
+<p><img src="/assets/images/spa/image-lint-workflow.png" alt="Lint 工作流程示意图"></p>
 <p>Android 项目中，一般我们有三种方式运行 Lint 检查：命令行、IDEA 的 Inspections 检查功能、Gradle Lint 任务，他们都由 <a href="http://tools.android.com/tips/lint" target="_blank" rel="noopener">AGP Android Lint</a> 提供，并由 Android 官方进行维护，虽然检查入口各不相同，但是底层都是同一套 Lint API 实现（提供 Lint 检查实现的 lint-api.jar 和封装好一些常用检查规则的 lint-check.jar，三种工作方式都是基于这两个类库实现）。</p>
 <p>届于 Lint API 涉及的类库比较复杂，这里不做深入讨论，主要介绍一下几个比较关键的 API：</p>
 <ol>
@@ -542,10 +542,10 @@ Android Studio 自带的 lint 检查流程
 <li>根据 Source Files，为每一个有文件变动的 Module 创建增量检查用的 Gradle Task；运行检查任务的时候，执行 <code>LintIncrementalClient#run()</code> 实现增量检查</li>
 </ol>
 </blockquote>
-<p>除了我们采用的第三种 Lint Gradle 方式，这里补充说明一下第二种 IDEA 的 Inspections 功能：通过 “IDEA - Analyse - Inspect Code” 可以迅速针对一个指定的文件做 Lint 检查。如下：<br><img src="TODO" alt="IDEA Inspect Code"></p>
+<p>除了我们采用的第三种 Lint Gradle 方式，这里补充说明一下第二种 IDEA 的 Inspections 功能：通过 “IDEA - Analyse - Inspect Code” 可以迅速针对一个指定的文件做 Lint 检查。如下：<br><img src="/assets/images/spa/image-idea-inspect-code.png" alt="IDEA Inspect Code"></p>
 <p>经过挖掘，我们发现其实现的关键代码在 <a href="https://github.com/JetBrains/android/blob/master/android/src/com/android/tools/idea/lint/LintIdeClient.java" target="_blank" rel="noopener">LintIdeClient.java</a>。通过 Inspections 方案，我们能直接对指定文件进行 Lint 检查，而不需要依赖于 Gradle 环境，这是 Lint 增量检查的最佳方案。不过考虑到 IDEA 版本之间的兼容性问题，而且我们还需要将检查工作合入到 DevOps 自动化流程里，所以最终还是选择了 Gradle Lint 方案。</p>
 <p>最后，关于具体的 Lint 实现有一点需要补充说明：Lint API 25 到 26 之间，无论是 API 接口还是具体的实现，变化都非常大，所以各位参考别人的具体实现代码的时候，一定要先分清当前的 API 版本是多少。</p>
-<h3 id="3-整体工作流程图"><a href="#3-整体工作流程图" class="headerlink" title="3. 整体工作流程图"></a>3. 整体工作流程图</h3><p>没有流程图的方案是没有灵魂的，如下：<br><img src="TODO" alt="workflow"></p>
+<h3 id="3-整体工作流程图"><a href="#3-整体工作流程图" class="headerlink" title="3. 整体工作流程图"></a>3. 整体工作流程图</h3><p>没有流程图的方案是没有灵魂的，如下：<br><img src="/assets/images/spa/image-workflows.png" alt="workflow"></p>
 <h2 id="结果沉淀"><a href="#结果沉淀" class="headerlink" title="结果沉淀"></a>结果沉淀</h2><!-- draft
 检查结果展示
 Incrementals
