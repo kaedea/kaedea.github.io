@@ -100,10 +100,10 @@
 <meta property="og:image" content="http://kaedea.com/assets/images/spa/image-lint-workflow.png">
 <meta property="og:image" content="http://kaedea.com/assets/images/spa/image-idea-inspect-code.png">
 <meta property="og:image" content="http://kaedea.com/assets/images/spa/image-workflows.png">
-<meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
-<meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
-<meta property="og:image" content="http://kaedea.com/2018/04/01/devops/incremental-spa/TODO">
-<meta property="og:updated_time" content="2021-05-03T12:53:52.169Z">
+<meta property="og:image" content="http://kaedea.com/assets/images/spa/image-demo-1.png">
+<meta property="og:image" content="http://kaedea.com/assets/images/spa/image-demo-1.png">
+<meta property="og:image" content="http://kaedea.com/assets/images/spa/image-demo-1.png">
+<meta property="og:updated_time" content="2021-05-03T13:11:18.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="静态程序分析（SPA）在代码合入检查里的应用">
 <meta name="twitter:description" content="静态程序分析，是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的">
@@ -363,7 +363,7 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T12:53:52+00:00">
+            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T13:11:18+00:00">
               2021-05-03
             </time>
             
@@ -553,9 +553,9 @@ Incrementals
 检查时间
 -->
 <!-- hotfix1 bgn -->
-<p>以代码仓库的 Demo 项目为例，如果执行一遍默认的 <code>:app:clean :app:lint</code> 检查任务，耗时 Configure + 检查任务整体耗时大概在 10s 左右，如下：<br><img src="TODO" alt=":app:clean :app:lint time consumed"></p>
-<p>接入增量 Lint 方案后，耗时已经能压缩到 1s 左右：<br><img src="TODO" alt=":app:clean :app:checkLint time consumed"></p>
-<p>即使加上增量的 CheckStyle 检查任务，再最终补上一个用来做检查结果报告的 <code>checkReport</code> 任务，整体增量检查耗时也能稳定在 1s：<br><img src="TODO" alt=":checkIncremental time consumde"></p>
+<p>以代码仓库的 Demo 项目为例，如果执行一遍默认的 <code>:app:clean :app:lint</code> 检查任务，耗时 Configure + 检查任务整体耗时大概在 10s 左右，如下：<br><img src="/assets/images/spa/image-demo-1.png" alt=":app:clean :app:lint time consumed"></p>
+<p>接入增量 Lint 方案后，耗时已经能压缩到 1s 左右：<br><img src="/assets/images/spa/image-demo-1.png" alt=":app:clean :app:checkLint time consumed"></p>
+<p>即使加上增量的 CheckStyle 检查任务，再最终补上一个用来做检查结果报告的 <code>checkReport</code> 任务，整体增量检查耗时也能稳定在 1s：<br><img src="/assets/images/spa/image-demo-1.png" alt=":checkIncremental time consumde"></p>
 <!-- hotfix1 end -->
 <!-- hotfix1-b bgn -->
 <p>在实际项目 MR 合入检查流水线里的应用效果如下：</p>
