@@ -336,7 +336,7 @@
               
                 
                 <a class="post-title-link" href="/2018/04/01/devops/incremental-spa/" itemprop="url">
-                  静态程序分析（SPA）的增量实现以及在代码合入检查里的应用
+                  增量静态检查（SPA）在代码合入检查里的应用
                 </a>
               
             
@@ -358,8 +358,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -400,7 +400,7 @@
 
           
           
-             <span id="/2018/04/01/devops/incremental-spa/" class="leancloud_visitors" data-flag-title="静态程序分析（SPA）的增量实现以及在代码合入检查里的应用">
+             <span id="/2018/04/01/devops/incremental-spa/" class="leancloud_visitors" data-flag-title="增量静态检查（SPA）在代码合入检查里的应用">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -426,7 +426,37 @@
 
       
         
-          <p>静态程序分析（Static Program Analyse，又称静态检查、静态分析等），是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的 References。</p>
+          <!-- draft
+Android 静态代码扫描效率优化与实践 - 美团
+[https://mp.weixin.qq.com/s/cY6rUrrjYRaIV--UzjiUgA](https://mp.weixin.qq.com/s/cY6rUrrjYRaIV--UzjiUgA)
+1. 背景
+2. 思考
+3. 实践
+4. 结果
+5. 沉淀
+6. 总结
+文章源代码计划：
+1. 高亮
+2. 多渠道
+3. 注释
+-->
+<ul>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="# 名词解释">名词解释</a><ul>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="# 问题背景">问题背景</a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="# 解决思路">解决思路</a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1.- 如何让静态检查工具只检查出新增部分代码带来的问题">1. 如何让静态检查工具只检查出新增部分代码带来的问题</a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2.- 如何提高静态检查的效率">2. 如何提高静态检查的效率</a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#** 具体 ** 方案 ** 实现 **"><strong> 具体 </strong> 方案 <strong> 实现 </strong></a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#**1.- 通过 - git - 计算 ** 增量 ** 代码的信息 **"><strong>1. 通过 git 计算 </strong> 增量 <strong> 代码的信息 </strong></a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2.- 基于 - agp - 插件的 - lint - 增量检查方案">2. 基于 AGP 插件的 Lint 增量检查方案</a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3**.- 整体 ** 工作 ** 流程图 **">3<strong>. 整体 </strong> 工作 <strong> 流程图 </strong></a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="# 结果沉淀">结果沉淀</a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="# 尾巴">尾巴</a></li>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;<a href="# 参考链接">参考链接</a></li>
+</ul>
+</li>
+</ul>
+<p>静态程序分析，是指在不运行程序的情况下分析检查代码里存在的问题。这项技术在代码质量、漏洞扫描等领域有广泛的使用。常见分析工具包括 CheckStyle、Lint、FindBugs 等，也有商用的 Coverity。本文主要讲述为我们在 Android 项目 Merge Request 合入检查里对静态程序分析技术的应用，核心内容是增量代码的静态分析方案，至于各种检查工具的对比筛选，请参考文末提供的 References。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2018/04/01/devops/incremental-spa/#more" rel="contents">
@@ -518,8 +548,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -683,8 +713,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -844,8 +874,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -1005,8 +1035,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -1168,8 +1198,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -1329,8 +1359,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -1490,8 +1520,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -1654,8 +1684,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -1816,8 +1846,8 @@
             <span class="post-meta-item-icon">
               <i class="fa fa-calendar-check-o"></i>
             </span>
-            <time title="Post modified" itemprop="dateModified" datetime="2021-05-03T15:33:20+00:00">
-              2021-05-03
+            <time title="Post modified" itemprop="dateModified" datetime="2021-08-06T03:57:07+00:00">
+              2021-08-06
             </time>
             
           </span>
@@ -1980,7 +2010,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-count">50</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
