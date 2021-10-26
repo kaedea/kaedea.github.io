@@ -20,12 +20,12 @@ header .site-branding .site-title a {
   background-color: #9f353a;
   line-height: 5rem;
   height: 5rem;
-  padding: 0 2rem;
+  padding: 0 5rem;
   -webkit-transition: padding 0.3s ease-out;
   transition: padding 0.3s ease-out;
 }
 header .site-branding .site-title a:hover {
-  padding: 0 2.5rem;
+  padding: 0 6rem;
 }
 header .site-branding .site-description {
   color: #9e9e9e;
