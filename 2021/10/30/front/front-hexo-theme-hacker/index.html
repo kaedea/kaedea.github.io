@@ -3,7 +3,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>博客源文件迁移到 Notion 云笔记 | Kaede Akatsuki | 中二病也要开发 Android</title>
+  <title>Hexo 主题 Hacker | Kaede Akatsuki | 中二病也要开发 Android</title>
 
   
   <meta name="author" content="Kaede Akatsuki">
@@ -15,14 +15,14 @@
 
   
   
-  <meta name="keywords" content="Notion,NotionDown">
+  <meta name="keywords" content="Blog,Hexo,主题">
   
 
   <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-  <meta property="og:title" content="博客源文件迁移到 Notion 云笔记">
+  <meta property="og:title" content="Hexo 主题 Hacker">
 
   <meta property="og:site_name" content="Kaede Akatsuki">
 
@@ -75,15 +75,15 @@
 
   
     
-    <h3 class="article-title"><a href="https://www.kaedea.com/2021/05/01/devops/project-notion-down/" target="_blank"><span>博客源文件迁移到 Notion 云笔记</span></a></h3>
+    <h3 class="article-title"><span>Hexo 主题 Hacker</span></h3>
     
   
 
   <div class="article-top-meta">
     <span class="posted-on">
-      <a href="/2021/09/01/devops/notion-to-hexo/" rel="bookmark">
-        <time class="entry-date published" datetime="2021-09-01T00:00:00.000Z">
-          2021-09-01
+      <a href="/2021/10/30/front/front-hexo-theme-hacker/" rel="bookmark">
+        <time class="entry-date published" datetime="2021-10-30T00:00:00.000Z">
+          2021-10-30
         </time>
       </a>
     </span>
@@ -114,7 +114,7 @@
 
 <div id="toc" class="toc-article">
       <div class="toc-content">
-        
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Theme-Preview"><span class="toc-text">Theme Preview</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Header"><span class="toc-text">Header</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Navigation"><span class="toc-text">Navigation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Table-Of-Content"><span class="toc-text">Table Of Content</span></a></li></ol></li></ol>
       </div>
 </div>
 <style>
@@ -126,22 +126,57 @@
 
 
 
-        <p>为了彻底解决日志编辑的 <code>割裂感</code> 问题，我已经把博客日志的全部源文件迁移到自己的 Notion 笔记，同时通过自动化技术，使用 <a href="https://www.kaedea.com/2021/05/01/devops/project-notion-down/" target="_blank" rel="noopener">NotionDown</a> 把 Notion Pages 解析成 MarkDown 源文件，并编译和部署成 Hexo 静态博客。</p>
-<p><img src="/assets/42d59036_fb28_4b90_8e31_e27a0280b81d_untitled.png" alt></p>
-<p>相同的解决方案可以参考：<a href="https://github.com/kaedea/notion-down-hexo-showcase" target="_blank" rel="noopener">https://github.com/kaedea/notion-down-hexo-showcase</a>。</p>
+        <p><img src="/assets/4de6c8fe_cdbc_4ca1_8f30_8db43d6415a9_untitled.png" alt></p>
+<p>时隔几年，终于想起给自己的 Blog 除草了。所以呢…… 又又又到了折腾博客主题的时间了！毕竟，不纠结主题的 Bloger 不是好程序员，正经 Bloger 谁写博客啊。</p>
+<p>很早之前就想给自己设计一个简洁点的 Hexo 主题，期间物色到了一位旅居日本的设计师的博客：<a href="http://blog.josui.me/" target="_blank" rel="noopener">Josui Writings</a>。原博客的主题排版比较符合我的意向，不过细节上我还是给自己做了一些调整。</p>
+<!-- ColumnList start -->
+<!-- Column 0 start -->
+<a id="more"></a>
+<!-- Column end -->
+<!-- Column 1 start -->
+<!-- Column end -->
+<!-- ColumnList end -->
+<p>相关变更：</p>
+<ol>
+<li>修改 Header 布局。</li>
+<li>修改正文 css 样式。</li>
+<li>修改底部 Navigation 布局。</li>
+<li>添加正文 TOC 模块。</li>
+<li>修改主题颜色。</li>
+</ol>
+<p>主题 Repo：<a href="https://github.com/kaedea/hexo-theme-hacker" target="_blank" rel="noopener">hexo-theme-hacker</a>。</p>
+<h2 id="Theme-Preview"><a href="#Theme-Preview" class="headerlink" title="Theme Preview"></a>Theme Preview</h2><h3 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h3><!-- ColumnList start -->
+<!-- Column 0 start -->
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/b7401d5e-2cc3-4f2d-a6c2-6a5ff4300597/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211030%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20211030T162713Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=c92401fa1d172c41ef0f117cdc7de2ceae314a68f14e5d783597ca731a14d8ef&amp;X-Amz-SignedHeaders=host" alt></p>
+<!-- Column end -->
+<!-- Column 1 start -->
+<!-- Column end -->
+<!-- ColumnList end -->
+<h3 id="Navigation"><a href="#Navigation" class="headerlink" title="Navigation"></a>Navigation</h3><!-- ColumnList start -->
+<!-- Column 0 start -->
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/ba23a17e-6605-4cbd-9204-6ee20df50dbb/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211030%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20211030T162714Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=b6de970dc6880ae9c5127ad06824c3fa1680d4bb7b02bf82f7bf5457baa572ca&amp;X-Amz-SignedHeaders=host" alt></p>
+<!-- Column end -->
+<!-- Column 1 start -->
+<!-- Column end -->
+<!-- ColumnList end -->
+<h3 id="Table-Of-Content"><a href="#Table-Of-Content" class="headerlink" title="Table Of Content"></a>Table Of Content</h3><!-- ColumnList start -->
+<!-- Column 0 start -->
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/5f6aa980-b407-4ee5-84be-4ee580d2fc31/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211030%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20211030T162714Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=5fd0e60236ffcec41361af269c627754fba1cd49946b4b9188e6e746dc0e448a&amp;X-Amz-SignedHeaders=host" alt></p>
+<!-- Column end -->
+<!-- Column 1 start -->
+<!-- Column end -->
+<!-- ColumnList end -->
 <!-- Generated by HexoWriter
 notion-down.version = 0.1.0
 notion-down.revision = b'6871ebd'
-Title = 博客源文件迁移到 Notion 云笔记
-Date = 2021-09-01
+Title = Hexo 主题 Hacker
+Date = 2021-10-30 00:00:00
 Published = true
 Category = Blog
-Tag = ['Notion', 'NotionDown']
-FileLocate = devops
-FileName = notion-to-hexo
-hexo.comments = false
-hexo.layout = link
-hexo.link = https://www.kaedea.com/2021/05/01/devops/project-notion-down/
+Tag = ['Blog', 'Hexo', '主题']
+FileLocate = front
+FileName = front-hexo-theme-hacker
+hexo.comments = true
 -->
 
       
@@ -166,7 +201,7 @@ hexo.link = https://www.kaedea.com/2021/05/01/devops/project-notion-down/
 
     <span class="post-tags">
       <i class="icon-tags"></i>
-        <a href="/tags/Notion/">Notion</a><a href="/tags/NotionDown/">NotionDown</a>
+        <a href="/tags/Blog/">Blog</a><a href="/tags/Hexo/">Hexo</a><a href="/tags/主题/">主题</a>
     </span>
     
 
