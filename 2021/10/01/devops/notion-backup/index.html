@@ -95,6 +95,37 @@
   <div class="article-content">
     <div class="entry">
       
+        
+
+<script type="text/javascript">
+    function convertRemToPixels(rem) {    
+        return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    }
+    window.onscroll = function() {
+        var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop > convertRemToPixels(40)) {
+            document.getElementsByClassName('toc-article')[0].style.visibility = 'visible';
+        } else {
+            document.getElementsByClassName('toc-article')[0].style.visibility = 'hidden';
+        }
+    }
+</script>
+
+
+<div id="toc" class="toc-article">
+      <div class="toc-content">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#NotionUp"><span class="toc-text">NotionUp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#备份-Notion-数据"><span class="toc-text">备份 Notion 数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#配合-CircleCi-使用"><span class="toc-text">配合 CircleCi 使用</span></a></li></ol>
+      </div>
+</div>
+<style>
+        .toc-level-3 i,
+        .toc-level-3 ol {
+            display: none !important;
+        }
+    </style>
+
+
+
         <p><img src="/assets/8f134329_a1a6_49b2_97a4_c07ea4c3e733_untitled.png" alt></p>
 <p>最近我已经把自己的笔记系统迁移到 Notion 上面，相比过去十年间用过的为知笔记和有道云笔记，Notion 的自定义和自动化玩法显然要丰富许多，而且多个平台的客户端也做得不错（国产软件现在都是满屏的广告非常难受）。不过我总感觉 Notion 在数据同步和历史数据版本控制上做得比较搓。</p>
 <p>比如我感觉我好像同步丢过几次数据，而且就算开了 Notion Pro 服务，Notion Page 的历史记录居然没有 <code>diff</code> 比对（这样很难看出不同历史记录之间的变更）。</p>
@@ -107,7 +138,7 @@
 <p>效果如下：<br>Notion 数据备份文归档</p>
 <!-- ColumnList start -->
 <!-- Column 0 start -->
-<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/96cc3ab6-2b10-4c1d-a136-4ac50867d7f1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211027%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20211027T032838Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=9af7f6af848b95d7b9051ad2c47b9903ab5b2a0b7357b49f1d514c33fae08c52&amp;X-Amz-SignedHeaders=host" alt></p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/96cc3ab6-2b10-4c1d-a136-4ac50867d7f1/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211030%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20211030T162715Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=4ebc729997c3cf5bf9de4534ca09b80f07719dac47be51e259e36458a1cf2d80&amp;X-Amz-SignedHeaders=host" alt></p>
 <!-- Column end -->
 <!-- Column 1 start -->
 <!-- Column end -->
@@ -115,7 +146,7 @@
 <p>Notion 数据 git diff</p>
 <!-- ColumnList start -->
 <!-- Column 0 start -->
-<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/3406a622-336c-4146-abc5-20b2576adaba/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211027%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20211027T032838Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=93450903becf3a6b7e5c7229405f65d77e4be84b3acbe27c605ebdadb2d70f1b&amp;X-Amz-SignedHeaders=host" alt></p>
+<p><img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/3406a622-336c-4146-abc5-20b2576adaba/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211030%2Fus-west-2%2Fs3%2Faws4_request&amp;X-Amz-Date=20211030T162716Z&amp;X-Amz-Expires=86400&amp;X-Amz-Signature=5d77b00535cb8aab660a1cffd3a87cde92e7d9096c1cadde4ba91635b897b3c3&amp;X-Amz-SignedHeaders=host" alt></p>
 <!-- Column end -->
 <!-- Column 1 start -->
 <!-- Column end -->
